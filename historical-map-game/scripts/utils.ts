@@ -24,15 +24,15 @@ export const SCREENS = {
     RESULTS: 'results'
 };
 
-// 4. CORE UTILITY FUNCTIONS (needed by multiple files)
-export function getDistance(lat1, lon1, lat2, lon2) {
-    // Calculate distance between two coordinates in km
-}
+// // 4. CORE UTILITY FUNCTIONS (needed by multiple files)
+// export function getDistance(lat1, lon1, lat2, lon2) {
+//     // Calculate distance between two coordinates in km
+// }
 
-export function shuffleArray(array) {
-    // Randomize array order for events
-}
+// export function shuffleArray(array) {
+//     // Randomize array order for events
+// }
 
-export function clamp(value, min, max) {
-    // Keep value within bounds
-}
+// export function clamp(value, min, max) {
+//     // Keep value within bounds
+// }
