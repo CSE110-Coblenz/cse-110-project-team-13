@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #2c3e50;
+}
+
+#start-screen {
+    text-align: center;
+}
+
+#start-button {
+    padding: 20px 60px;
+    font-size: 24px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#start-button:hover {
+    background: #c0392b;
+}
