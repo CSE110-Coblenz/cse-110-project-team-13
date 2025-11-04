@@ -16,15 +16,16 @@
 
     <!-- Game Screen (Added in feature/interactive-map branch) -->
     <div id="game-screen" class="screen">
+    <div id="map-header">
         <h1>Map Screen</h1>
         <button id="back-button">Back to Start</button>
-        <div id="map-placeholder">
-            Interactive Map Will Go Here
-            <br>
-            <small>(Click anywhere to simulate guesses)</small>
-        </div>
     </div>
+    <div id="map-placeholder"></div>
+    </div>
+    
+    <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="scripts/main.js"></script>
+    <!-- Updated to module -->
+    <script type="module" src="./dist/main.js"></script>
 </body>
 </html>
