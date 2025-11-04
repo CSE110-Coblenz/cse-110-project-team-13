@@ -1,0 +1,106 @@
+{
+  "version": "1.0",
+  "metadata": {
+      "totalEvents": 15,
+      "lastUpdated": "2025-11-04",
+      "categories": ["Ancient", "Medieval", "Renaissance", "Modern", "American", "European", "Asian"]
+  },
+  "events": [
+      {
+          "id": 1,
+          "name": "Battle of Megiddo",
+          "story": "Around 1457 BCE, Pharaoh Thutmose III led Egyptian forces to victory over a coalition of Canaanite kings near Megiddo. This is considered the first recorded battle in human history, documented in detailed inscriptions on temple walls.",
+          "image": "assets/images/events/megiddo.jpg",
+          "location": {
+              "latitude": 32.5840,
+              "longitude": 35.1828,
+              "city": "Megiddo",
+              "country": "Ancient Egypt / Canaan (modern Israel)"
+          },
+          "year": "c. 1457 BCE",
+          "category": "Ancient",
+          "difficulty": "medium",
+          "hint-1": "This was the first recorded battle in human history.",
+          "hint-2": "It involved Pharaoh Thutmose III and a coalition of Canaanite kings.",
+          "hint-3": "It took place in a location whose name later inspired 'Armageddon'.",
+          "tags": ["egypt", "warfare", "ancient", "pharaoh", "megiddo"]
+      },
+      {
+          "id": 2,
+          "name": "Construction of the Great Pyramids of Giza",
+          "story": "Around 2600 BCE, the Egyptians began constructing the Great Pyramids at Giza during the Fourth Dynasty. Built as tombs for the pharaohs Khufu, Khafre, and Menkaure, these monumental structures became enduring symbols of ancient engineering and power.",
+          "image": "assets/images/events/pyramids.jpg",
+          "location": {
+              "latitude": 29.9792,
+              "longitude": 31.1342,
+              "city": "Giza",
+              "country": "Egypt"
+          },
+          "year": "c. 2600 BCE",
+          "category": "Ancient",
+          "difficulty": "easy",
+          "hint-1": "These structures were built as tombs for pharaohs.",
+          "hint-2": "They are one of the Seven Wonders of the Ancient World.",
+          "hint-3": "You can still see them near modern-day Cairo.",
+          "tags": ["egypt", "architecture", "pyramids", "ancient", "wonder"]
+      },
+      {
+          "id": 3,
+          "name": "Code of Hammurabi Inscribed",
+          "story": "Around 1750 BCE, King Hammurabi of Babylon established one of the earliest known sets of written laws. Inscribed on a basalt stele, the Code of Hammurabi outlined legal standards, punishments, and social order in Mesopotamian society.",
+          "image": "assets/images/events/hammurabi.jpg",
+          "location": {
+              "latitude": 33.1000,
+              "longitude": 44.4000,
+              "city": "Babylon",
+              "country": "Iraq"
+          },
+          "year": "c. 1750 BCE",
+          "category": "Ancient",
+          "difficulty": "medium",
+          "hint-1": "This artifact contains one of the earliest written legal codes.",
+          "hint-2": "It was created by a Babylonian king.",
+          "hint-3": "Its motto could be summarized as 'an eye for an eye'.",
+          "tags": ["babylon", "law", "ancient", "mesopotamia", "hammurabi"]
+      },
+      {
+          "id": 4,
+          "name": "The Trojan War",
+          "story": "According to ancient Greek legend, the Trojan War took place around 1200 BCE when Greek forces besieged the city of Troy after Paris of Troy abducted Helen of Sparta. The epic tales of this war were immortalized in Homer's Iliad and Odyssey.",
+          "image": "assets/images/events/trojanwar.jpg",
+          "location": {
+              "latitude": 39.9571,
+              "longitude": 26.2389,
+              "city": "Troy",
+              "country": "Modern Turkey"
+          },
+          "year": "c. 1200 BCE (legendary)",
+          "category": "Ancient",
+          "difficulty": "medium",
+          "hint-1": "This legendary conflict inspired Homer's Iliad.",
+          "hint-2": "It was sparked by the abduction of Helen.",
+          "hint-3": "A famous 'wooden horse' played a key role in its end.",
+          "tags": ["greece", "troy", "mythology", "war", "legend"]
+      },
+      {
+        "id": 5,
+        "name": "Establishment of the Roman Republic",
+        "story": "In 509 BCE, the Roman people overthrew their last king, Lucius Tarquinius Superbus, ending the Roman monarchy. In its place, they established the Roman Republic — a new system of government led by elected consuls and a senate. This marked the beginning of Rome’s transformation into a dominant power in the ancient world.",
+        "image": "assets/images/events/roman_republic.jpg",
+        "location": {
+          "latitude": 41.8925,
+          "longitude": 12.4853,
+          "city": "Rome",
+          "country": "Italy"
+        },
+        "year": "509 BCE",
+        "category": "Ancient",
+        "difficulty": "medium",
+        "hint-1": "This event ended Rome’s period of kings.",
+        "hint-2": "It introduced a system led by consuls and a senate.",
+        "hint-3": "It laid the foundation for what would become the Roman Empire.",
+        "tags": ["rome", "republic", "ancient", "government", "revolution"]
+      }
+      
+  ]
+}
