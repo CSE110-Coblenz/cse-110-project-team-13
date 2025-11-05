@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #94d8e9;
+    
+    display:flex;
+    flex-direction: column; 
+    background-image: url(assets/images/map-blurred.png);
+    background-size: fill;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: monospace;
+
+}
+
+#start-screen {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+#start-button {
+    padding: 20px 60px;
+    font-size: 24px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#start-button:hover {
+    background: #c0392b;
+    transform:scale(1.1); 
+}
+/* Game Screen */
+/* Hide the game screen by default */
+#game-screen h1 {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    margin: 0;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    font-size: 1.2rem;
+    width: auto;
+    height: auto;
+    display: inline-block;
+}
+
+/* Need to fix position of the back button */
+#back-button {
+    z-index: 1000; /* must be higher than Leaflet’s map */
+    background-color: #acb6b6;
+    color: #000000;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    left: 200px;
+    top: 10px;
+    position: absolute;
+}
+
+
+#back-button:hover {
+    background: #95a5a6;
+}
+
+/* Interactive Map */
+#map-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#map-header h1 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+#map-header button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #0077cc;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#map-header button:hover {
+    background-color: #005fa3;
+}
+
+/* Map container should take full screen */
+#map-placeholder {
+    height: 100vh;
+    width: 100vw;
+}

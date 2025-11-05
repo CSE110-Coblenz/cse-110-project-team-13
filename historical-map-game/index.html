@@ -4,16 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History Map Game</title>
-    <link rel="stylesheet" href="start-page-styles.css">
+    <!-- For leaflet interactive map css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>
         WORLD HISTORY: EVENT PICTURE GUESSER
     </h1> <br>
+    <!-- Start Screen (Added in feature/start-page branch) -->
     <div id="start-screen">
         <button id="start-button">START</button>
     </div>
+
+    <!-- Game Screen (Added in feature/interactive-map branch) -->
+    <div id="game-screen" class="screen">
+    <div id="map-header">
+        <h1>Map Screen</h1>
+        <button id="back-button">Back to Start</button>
+    </div>
+    <div id="map-placeholder"></div>
+    </div>
     
-    <script src="scripts/main.js"></script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Updated to module -->
+    <script type="module" src="./dist/main.js"></script>
 </body>
 </html>
