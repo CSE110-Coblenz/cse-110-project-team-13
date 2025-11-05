@@ -6,7 +6,11 @@ let marker: any = null;
 
 export function initMap(containerId: string): void {
     if (map) return;
-    map = L.map(containerId).setView([20, 0], 2);
+    map = L.map(containerId, {
+      minZoom: 3,
+      worldCopyJump: false,
+      maxBounds: [[-85, -180], [85, 200]]
+    }).setView([20, 0], 2);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
         attribution: "&copy; OpenStreetMap contributors"
@@ -23,7 +27,3 @@ export function initMap(containerId: string): void {
       });
       
 }
-
-
-
-
