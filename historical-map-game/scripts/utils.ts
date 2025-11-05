@@ -6,6 +6,9 @@ export const GAME_CONFIG = {
         PERFECT_GUESS: 100,
         MAX_DISTANCE_KM: 10000,
         DISTANCE_THRESHOLD: 500
+    },
+    TIMER: {
+        GUESS_TIME: 120 // seconds
     }
 };
 
