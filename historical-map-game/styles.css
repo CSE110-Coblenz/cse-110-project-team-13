@@ -1,15 +1,30 @@
 body {
     margin: 0;
     padding: 0;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #2c3e50;
+    background: #94d8e9;
+    
+    display:flex;
+    flex-direction: column; 
+    background-image: url(assets/images/map-blurred.png);
+    background-size: fill;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: monospace;
+
 }
 
 #start-screen {
     text-align: center;
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 2rem;
+   
 }
 
 #start-button {
@@ -24,4 +39,5 @@ body {
 
 #start-button:hover {
     background: #c0392b;
+    transform:scale(1.1); 
 }
