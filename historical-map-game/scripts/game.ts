@@ -3,7 +3,7 @@ import { GAME_CONFIG } from "./utils"
 console.log('hello world!');
 
 export class Game {
-    private timer: number | null = null;
+    private timer: NodeJS.Timeout | number | null = null;
 
 
     /**
