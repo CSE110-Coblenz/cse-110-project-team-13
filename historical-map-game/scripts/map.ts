@@ -1,6 +1,8 @@
 declare const L: any;  // L exists globally
 
 export let map: any = null;
+let marker: any = null;
+
 
 export function initMap(containerId: string): void {
     if (map) return;
@@ -9,4 +11,19 @@ export function initMap(containerId: string): void {
         maxZoom: 18,
         attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
+    
+    map.on('click', (e: L.LeafletMouseEvent) => {
+        console.log('Clicked:', e.latlng);
+    
+        if (!marker) {
+          marker = L.marker(e.latlng).addTo(map);
+        } else {
+          marker.setLatLng(e.latlng);
+        }
+      });
+      
 }
+
+
+
+
