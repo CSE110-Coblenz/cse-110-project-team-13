@@ -1,55 +1,54 @@
-import { GAME_CONFIG } from "./utils"
+          
+const timeDisplay = document.getElementById("time") as HTMLElement;
+const GUESS_TIME = 120;
+let timeLeft = GUESS_TIME; // seconds
+let timerInterval: number | null = null;
 
-console.log('hello world!');
+function startGame(): void {
 
-export class Game {
-    private timer: NodeJS.Timeout | number | null = null;
+}
+    
+export function startTimer(onTimeUp?: () => void) {
+  timeLeft = GUESS_TIME;
+  updateTimer();
 
+  timerInterval = window.setInterval(() => {
+    timeLeft--;
+    updateTimer();
 
-    /**
-     * Updates the score counter
-     * @param score 
-     */
-    updateScore(score: number): void {
+    if (timeLeft <= 0) {
+      stopTimer();
+      if (onTimeUp) onTimeUp();
+    }
+  }, 1000);
+}
+
+// ✅ Stop the countdown
+export function stopTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
+// ✅ Reset the countdown
+export function resetTimer() {
+  timeLeft = GUESS_TIME;
+  updateTimer();
+}
+
+// ✅ Update display (MM:SS format)
+function updateTimer() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  timeDisplay.textContent = 
+    `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
+function updateScore(score: number): void {
         
-    }
+}
 
-    /**
-     * Updates the timer
-     * @param time 
-     */
-    updateTimer(time: number): void {
-        
-    }
 
-    /**
-     * Start the timer
-     */
-    startTimer(): void {
-        let timeRemaining = GAME_CONFIG.TIMER.GUESS_TIME;
-        this.timer = setInterval(() => {
-            timeRemaining -= 1;
-            this.updateTimer(timeRemaining);
-            if(timeRemaining <= 0) {
-                this.submitGuess();
-            }
-        }, 1000);
-    }
-
-    /**
-     * Stop the timer
-     */
-    stopTimer(): void {
-        if(this.timer != null) {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
-    }
-
-    /**
-     * End round when user submits guess or timer runs out
-     */
-    submitGuess(): void {
-        this.stopTimer();
-    }
+function handleGuess(): void {
+    stopTimer();
 }
