@@ -23,7 +23,7 @@ export function startTimer(onTimeUp?: () => void) {
   }, 1000);
 }
 
-// ✅ Stop the countdown
+// Stop the countdown
 export function stopTimer() {
   if (timerInterval) {
     clearInterval(timerInterval);
@@ -31,13 +31,13 @@ export function stopTimer() {
   }
 }
 
-// ✅ Reset the countdown
+// Reset the countdown
 export function resetTimer() {
   timeLeft = GUESS_TIME;
   updateTimer();
 }
 
-// ✅ Update display (MM:SS format)
+// Update display (MM:SS format)
 function updateTimer() {
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
