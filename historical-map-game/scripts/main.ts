@@ -1,8 +1,6 @@
 import { initMap } from "./map.js";
 import { showStartScreen, showGameScreen, startButton, backButton } from "./ui.js";
-
 import './howto.js'
-
 import { startTimer, stopTimer, resetTimer } from "./game.js";
 
 
