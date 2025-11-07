@@ -9,7 +9,7 @@ body {
     display:flex;
     flex-direction: column; 
     background-image: url(assets/images/map-blurred.png);
-    background-size: fill;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -18,17 +18,22 @@ body {
 }
 
 #start-screen {
+    padding-top: 1rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; 
 }
 
 h1 {
     text-align: center;
     padding-bottom: 2rem;
+    font-size: 2rem;
 }
 
 #start-button {
     padding: 20px 60px;
-    font-size: 24px;
+    font-size: 1.5rem;
     background: #e74c3c;
     color: white;
     border: none;
@@ -36,9 +41,37 @@ h1 {
     cursor: pointer;
 }
 
+#how-to-play {
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer; 
+}
+
+#how-to-play:hover {
+    background: #c0392b;
+    transform:scale(1.1); 
+}
+
 #start-button:hover {
     background: #c0392b;
     transform:scale(1.1); 
+}
+
+#howto-dialog {
+  max-width: 480px;
+  width: min(92vw, 480px);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+#howto-dialog::backdrop {
+  background: rgba(0,0,0,.45);
 }
 /* Game Screen */
 /* Hide the game screen by default */

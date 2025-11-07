@@ -1,5 +1,7 @@
 import { initMap } from "./map.js";
 import { showStartScreen, showGameScreen, startButton, backButton } from "./ui.js";
+import './howto.js'
+
 
     window.addEventListener("DOMContentLoaded", () => {
     showStartScreen();
