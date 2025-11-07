@@ -1,8 +1,51 @@
-name: Simple CI Test
-on: [push]
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: historical-map-game
+    
     steps:
-      - name: Say Hello
-        run: echo "🎉 CI is working!"
+    # 1. Checkout code
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    # 2. Setup Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    # 3. Install dependencies
+    - name: Install dependencies
+      run: npm install
+      
+    # 4. Run TypeScript compilation check
+    - name: TypeScript Compilation Check
+      run: npx tsc --noEmit
+      
+    # 5. Run basic tests
+    - name: Run Basic Checks
+      run: |
+        echo "🧪 Running basic checks..."
+        test -f index.html && echo "✅ index.html exists" || echo "❌ index.html missing"
+        test -f styles.css && echo "✅ styles.css exists" || echo "❌ styles.css missing"
+        test -f scripts/main.ts && echo "✅ main.ts exists" || echo "❌ main.ts missing"
+        test -f package.json && echo "✅ package.json exists" || echo "❌ package.json missing"
+        
+    # 6. Run custome CI tests
+    - name: Run Custom Tests
+      run: node tests/ci-test.js
+      
+    # 7. Build the project
+    - name: Build Project
+      run: npm run build

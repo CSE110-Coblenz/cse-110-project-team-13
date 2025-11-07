@@ -8,9 +8,10 @@
     },
     "scripts": {
         "build": "tsc",
-        "test": "echo 'Running tests...' && npm run build",
+        "test": "node tests/ci-test.js",
+        "test:ci": "node tests/ci-test.js && npx tsc --noEmit",
         "lint": "echo 'Linting would go here'",
-        "ci": "npm run build && npm test",
+        "ci": "npm run build && npm npm run test:ci",
         "dev": "tsc --watch"
     },
     "devDependencies": {
