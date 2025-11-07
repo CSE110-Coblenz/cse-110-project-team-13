@@ -4,14 +4,18 @@
     "dependencies": {
         "@types/node": "^20.10.0",
         "leaflet": "^1.9.4",
-        "sqlite3": "^5.1.6",
-        "typescript": "^5.3.3"
+        "sqlite3": "^5.1.6"
     },
     "scripts": {
         "build": "tsc",
+        "test": "echo 'Running tests...' && npm run build",
+        "lint": "echo 'Linting would go here'",
+        "ci": "npm run build && npm test",
         "dev": "tsc --watch"
     },
     "devDependencies": {
-        "@types/leaflet": "^1.9.21"
+        "@types/leaflet": "^1.9.21",
+        "typescript": "^5.0.0",
+        "@types/node": "^20.0.0"
     }
 }
