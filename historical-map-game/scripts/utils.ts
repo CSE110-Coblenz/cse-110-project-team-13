@@ -7,9 +7,7 @@ export const GAME_CONFIG = {
         MAX_DISTANCE_KM: 10000,
         DISTANCE_THRESHOLD: 500
     },
-    TIMER: {
-        GUESS_TIME: 120 // seconds
-    }
+    GUESS_TIME: 120 // seconds
 };
 
 // 2. MAP CONFIGURATION (needed by map.js)
