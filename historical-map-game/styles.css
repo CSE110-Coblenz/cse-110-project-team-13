@@ -29,6 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem; 
+    align-items: center;
 }
 
 h1 {
@@ -38,7 +39,7 @@ h1 {
 }
 
 #start-button {
-    padding: 10px 25px;
+    padding: 1rem 4rem;
     font-size: 1.3rem;
     background: #e74c3c;
     color: white;
@@ -49,7 +50,7 @@ h1 {
 }
 
 #how-to-play {
-    padding: 10px 25px;
+    padding: 1rem 2rem;
     font-size: 1.3rem;
     background: #e74c3c;
     color: white;
