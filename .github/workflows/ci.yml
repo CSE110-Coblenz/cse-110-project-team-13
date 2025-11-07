@@ -1,0 +1,24 @@
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: historical-map-game
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: npm
+        cache-dependency-path: historical-map-game/package-lock.json
+
+      
+    - run: npm install
+    - run: npx tsc --noEmit
+    - run: node tests/ci-test.cjs
+    - run: npm run build

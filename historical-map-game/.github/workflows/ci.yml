@@ -1,0 +1,50 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. Checkout code
+    - name: Checkout code
+      uses: actions/checkout@v3 # pre-built GitHub Action provided by GitHub 
+                                # It's like running:
+                                # git clone https://github.com/your-username/your-repo.git
+                                # cd your-repo
+
+    # 2. Setup Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+            # Download and install Node.js 18
+            # Set up npm cache for faster installs
+            # Configure the environment
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    # 3. Install dependencies
+    - name: Install dependencies
+      run: npm install
+      
+    # 4. Run TypeScript compilation check
+    - name: TypeScript Compilation Check
+      run: npx tsc --noEmit # tsc to skip the emission of any output files. Turns the compiler into a type-checking-only tool
+      
+    # 5. Run basic tests
+    - name: Run Basic Checks
+      run: |
+        echo "🧪 Running basic checks..."
+        # Check if key files exist
+        test -f index.html && echo "✅ index.html exists" || echo "❌ index.html missing"
+        test -f styles.css && echo "✅ styles.css exists" || echo "❌ styles.css missing"
+        test -f scripts/main.ts && echo "✅ main.ts exists" || echo "❌ main.ts missing"
+        
+    # 6. Build the project
+    - name: Build Project
+      run: npm run build
