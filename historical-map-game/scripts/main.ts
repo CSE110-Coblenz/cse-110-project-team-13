@@ -1,7 +1,7 @@
 import { initMap } from "./map.js";
-import { showStartScreen, showGameScreen, startButton, backButton } from "./ui.js";
+import { showStartScreen, showGameScreen, startButton, backButton, submitGuessButton } from "./ui.js";
 import './howto.js'
-import { startTimer, stopTimer, resetTimer } from "./game.js";
+import { startTimer, stopTimer, resetTimer, handleGuess } from "./game.js";
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
         showGameScreen();
         initMap("map-placeholder"); // only map.ts knows how to do this
         startTimer(() => {
-            alert("Time’s up!");
+            alert("Time's up!");
             resetTimer();
         });
     });
@@ -21,4 +21,22 @@ window.addEventListener("DOMContentLoaded", () => {
         stopTimer();
         resetTimer();
     });
+    
+    if (submitGuessButton) {
+        submitGuessButton.addEventListener("click", (e) => {
+            handleGuess();
+            return false;
+        });
+        
+        // Prevent map from capturing clicks on the button
+        submitGuessButton.addEventListener("mousedown", (e) => {
+            e.stopPropagation();
+        });
+        
+        submitGuessButton.addEventListener("mouseup", (e) => {
+            e.stopPropagation();
+        });
+    } else {
+        console.error("Submit guess button not found!");
+    }
 });
