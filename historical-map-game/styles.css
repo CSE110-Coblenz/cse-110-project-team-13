@@ -157,3 +157,124 @@ h1 {
     font-weight: bold;
     color: #000000;
 }
+
+/* Historical Image Container */
+#historical-image-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: move;
+    transition: all 0.3s ease;
+}
+
+#historical-image-container.image-minimized {
+    width: 250px;
+    height: 250px;
+}
+
+#historical-image-container.image-maximized {
+    width: 60vw;
+    height: 60vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: auto;
+    right: auto;
+}
+
+#image-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#image-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.image-front, .image-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.image-front {
+    background: white;
+}
+
+.image-back {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+#historical-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Buttons */
+#hint-button {
+    position: absolute;
+    top: -15px;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: 1001;
+    padding: 8px 16px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+}
+
+#hint-button:hover {
+    background: #ee5a52;
+}
+
+#maximize-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1001;
+    width: 35px;
+    height: 35px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+#maximize-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Prevent dragging when maximized (optional) */
+#historical-image-container.image-maximized {
+    cursor: default;
+}
