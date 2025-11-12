@@ -11,9 +11,9 @@ export function initMap(containerId: string): void {
       worldCopyJump: false,
       maxBounds: [[-85, -180], [85, 200]]
     }).setView([20, 0], 2);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 18,
-        attribution: "&copy; OpenStreetMap contributors"
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 19,
+      attribution: "Tiles &copy; Esri — Sources: Esri, USGS, NOAA"
     }).addTo(map);
     
     map.on('click', (e: L.LeafletMouseEvent) => {
