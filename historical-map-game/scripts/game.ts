@@ -1,5 +1,7 @@
           
 const timeDisplay = document.getElementById("time") as HTMLElement;
+const scoreDisplay = document.getElementById("score") as HTMLElement; 
+let score = 0; 
 const GUESS_TIME = 120;
 let timeLeft = GUESS_TIME; // seconds
 let timerInterval: number | null = null;
@@ -44,11 +46,13 @@ function updateTimer() {
   timeDisplay.textContent = 
     `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
-function updateScore(score: number): void {
-        
+function updateScore(newScore: number): void {
+        score = newScore; 
+        scoreDisplay.textContent = `Score: ${score}`; 
 }
 
 
 function handleGuess(): void {
     stopTimer();
+    updateScore(score + 10); // currently adding 10 points per guess 
 }

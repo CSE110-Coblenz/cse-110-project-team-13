@@ -96,6 +96,18 @@ h1 {
     height: auto;
     display: inline-block;
 }
+/* Score position below */ 
+
+#score {
+    position: absolute;
+    left:50%; 
+    top:1rem; 
+    font-size: 2rem;
+    font-weight: bold;
+    color: green;
+    transform: translateX(-50%);
+    
+}
 
 /* Need to fix position of the back button */
 #back-button {
