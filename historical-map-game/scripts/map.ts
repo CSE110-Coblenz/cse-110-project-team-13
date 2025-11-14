@@ -1,4 +1,6 @@
 declare const L: any;  // L exists globally
+import { isDragging } from "./image.js";
+
 
 export let map: any = null;
 let marker: any = null;
@@ -17,6 +19,9 @@ export function initMap(containerId: string): void {
     }).addTo(map);
     
     map.on('click', (e: L.LeafletMouseEvent) => {
+        if (isDragging) 
+          return; 
+
         console.log('Clicked:', e.latlng);
     
         if (!marker) {

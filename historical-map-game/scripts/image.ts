@@ -4,10 +4,11 @@ export const hintButton = document.getElementById("hint-button")!;
 export const maximizeButton = document.getElementById("maximize-button")!;
 export const historicalImage = document.getElementById("historical-image") as HTMLImageElement;
 export const hintText = document.getElementById("hint-text")!;
+export let isDragging = false;
+
 import { map } from "./map.js";
 
 let isMaximized = false;
-let isDragging = false;
 let currentX: number;
 let currentY: number;
 let initialX: number;
@@ -37,6 +38,11 @@ export function toggleMaximize() {
 
 // Drag functionality
 function dragStart(e: MouseEvent | TouchEvent) {
+    isDragging = true;  
+
+    // disable map drag
+    if (map) map.dragging.disable();
+
     if (e.type === "touchstart") {
         initialX = (e as TouchEvent).touches[0].clientX - xOffset;
         initialY = (e as TouchEvent).touches[0].clientY - yOffset;
