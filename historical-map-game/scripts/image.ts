@@ -4,6 +4,7 @@ export const hintButton = document.getElementById("hint-button")!;
 export const maximizeButton = document.getElementById("maximize-button")!;
 export const historicalImage = document.getElementById("historical-image") as HTMLImageElement;
 export const hintText = document.getElementById("hint-text")!;
+import { map } from "./map.js";
 
 let isMaximized = false;
 let isDragging = false;
@@ -69,9 +70,10 @@ function drag(e: MouseEvent | TouchEvent) {
 }
 
 function dragEnd() {
-    initialX = currentX;
-    initialY = currentY;
     isDragging = false;
+
+    initialX = xOffset;
+    initialY = yOffset;
 }
 
 function setTranslate(xPos: number, yPos: number, el: HTMLElement) {
@@ -82,14 +84,30 @@ function setTranslate(xPos: number, yPos: number, el: HTMLElement) {
 
 // Initialize drag listeners
 export function initializeDragging() {
-    imageContainer.addEventListener("mousedown", dragStart);
-    imageContainer.addEventListener("touchstart", dragStart);
-    
+    imageContainer.addEventListener("mousedown", (e) => {
+        e.stopPropagation();
+        if (map) map.dragging.disable();
+        dragStart(e);
+    });
+
+    imageContainer.addEventListener("touchstart", (e) => {
+        e.stopPropagation();
+        if (map) map.dragging.disable();
+        dragStart(e);
+    });
+
     document.addEventListener("mousemove", drag);
     document.addEventListener("touchmove", drag);
-    
-    document.addEventListener("mouseup", dragEnd);
-    document.addEventListener("touchend", dragEnd);
+
+    document.addEventListener("mouseup", (e) => {
+        dragEnd();
+        if (map) map.dragging.enable();
+    });
+
+    document.addEventListener("touchend", (e) => {
+        dragEnd();
+        if (map) map.dragging.enable();
+    });
 }
 
 // Set image source and hint
