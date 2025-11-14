@@ -1,7 +1,7 @@
 declare const L: any;  // L exists globally
 
 export let map: any = null;
-let marker: any = null;
+export let marker: any = null;
 
 
 export function initMap(containerId: string): void {

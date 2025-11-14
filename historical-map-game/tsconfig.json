@@ -8,7 +8,8 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true
     },
     // scripts/**/*.ts tells TS which files to compile, so all .ts files
     "include": ["scripts/**/*.ts"],
