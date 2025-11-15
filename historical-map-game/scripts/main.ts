@@ -1,11 +1,16 @@
 import { initMap } from "./map.js";
-import { showStartScreen, showGameScreen, startButton, backButton } from "./ui.js";
+import { showStartScreen, showGameScreen, startButton, } from "./ui.js";
 import './howto.js'
 import { startTimer, stopTimer, resetTimer } from "./game.js";
 import { initializeDragging, loadHistoricalImage } from "./image.js";
+import { initializeMenu } from "./menu.js"; // ADD THIS LINE
 
 
 window.addEventListener("DOMContentLoaded", () => {
+    console.log('Main: DOMContentLoaded fired');
+
+    initializeMenu();
+
     initializeDragging();
     
     loadHistoricalImage(
@@ -22,12 +27,6 @@ window.addEventListener("DOMContentLoaded", () => {
             alert("Time’s up!");
             resetTimer();
         });
-    });
-
-    backButton.addEventListener("click", () => {
-        showStartScreen();
-        stopTimer();
-        resetTimer();
     });
 
 

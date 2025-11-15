@@ -81,6 +81,7 @@ h1 {
 #howto-dialog::backdrop {
   background: rgba(0,0,0,.45);
 }
+
 /* Game Screen */
 /* Hide the game screen by default */
 #game-screen h1 {
@@ -97,36 +98,22 @@ h1 {
     display: inline-block;
 }
 
-/* Need to fix position of the back button */
-#back-button {
-    z-index: 1000; /* must be higher than Leaflet’s map */
-    background-color:  #95a5a6 ;
-    color: #000000;
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-style: bold;
-    font-size: 17px;
-    cursor: pointer;
-    left: 70px;
-    top: 10px;
-    position: absolute;
-}
-
-
-#back-button:hover {
-    background:#FE0000;
-}
-
 #tools {
     position: absolute;
-    z-index: 1000;
+    top: 10px;
+    left: 10px;
+    right: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    
-  }
+    gap: 15px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+#tools > * {
+    pointer-events: auto; 
+}
 
 #map-header h1 {
     font-size: 1.2rem;
@@ -151,38 +138,48 @@ h1 {
     height: 100vh;
     width: 100vw;
 }
+
 #time {
-    padding-left: 90%;
+    padding-left: 60%;
     font-size: 3rem;
     font-weight: bold;
     color: #000000;
 }
 
-/* Historical Image Container */
+/* ========================================
+   HISTORICAL IMAGE CONTAINER
+   ======================================== */
+
 #historical-image-container {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    z-index: 1000;
+    z-index: 500;
     cursor: move;
-    transition: all 0.3s ease;
+    transition: width 0.3s ease, height 0.3s ease;
+    user-select: none;
 }
 
+/* Minimized state */
 #historical-image-container.image-minimized {
     width: 250px;
     height: 250px;
 }
 
+/* Maximized state */
 #historical-image-container.image-maximized {
     width: 60vw;
     height: 60vh;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) !important;
     bottom: auto;
     right: auto;
+    cursor: default;
+    z-index: 1500;
 }
 
+/* Image card with flip animation */
 #image-card {
     position: relative;
     width: 100%;
@@ -193,21 +190,25 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Flipped state */
 #image-card.flipped {
     transform: rotateY(180deg);
 }
 
+/* Front and back faces */
 .image-front, .image-back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     border-radius: 15px;
     overflow: hidden;
 }
 
 .image-front {
     background: white;
+    transform: rotateY(0deg);
 }
 
 .image-back {
@@ -227,9 +228,14 @@ h1 {
     height: 100%;
     object-fit: cover;
     border-radius: 15px;
+    display: block;
 }
 
-/* Buttons */
+/* ========================================
+   IMAGE BUTTONS
+   ======================================== */
+
+/* Hint button */
 #hint-button {
     position: absolute;
     top: -15px;
@@ -244,13 +250,20 @@ h1 {
     cursor: pointer;
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    pointer-events: auto;
 }
 
 #hint-button:hover {
     background: #ee5a52;
+    transform: translateX(50%) scale(1.05);
 }
 
+#hint-button:active {
+    transform: translateX(50%) scale(0.95);
+}
+
+/* Maximize button */
 #maximize-button {
     position: absolute;
     top: 10px;
@@ -267,14 +280,184 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    pointer-events: auto;
 }
 
 #maximize-button:hover {
     background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
 }
 
-/* Prevent dragging when maximized (optional) */
-#historical-image-container.image-maximized {
-    cursor: default;
+#maximize-button:active {
+    transform: scale(0.95);
+}
+
+#hint-button,
+#maximize-button {
+    pointer-events: auto !important;
+    touch-action: none;
+}
+
+/* Prevent text selection during drag */
+#historical-image-container * {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+/*hamburger menu styling */
+.hamburger-menu {
+    background: rgba(51, 51, 51, 0.9);
+    border: 2px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 12px;
+    z-index: 1002;
+    margin-left: 60px;
+    transition: background 0.3s;
+}
+
+.hamburger-menu:hover {
+    background: rgba(51, 51, 51, 1);
+}
+
+/* Three lines */
+.hamburger-menu span {
+    width: 25px;
+    height: 2.5px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/* Animation to X when active */
+.hamburger-menu.active span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* Dropdown menu */
+#menu-nav {
+    position: fixed;
+    top: 70px;
+    left: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    transition: all 0.3s;
+}
+
+#menu-nav.menu-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#menu-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+#menu-nav li {
+    margin: 0;
+}
+
+.menu-option {
+    width: 100%;
+    padding: 15px 30px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: #333;
+    font-weight: 500;
+}
+
+.menu-option:hover {
+    background: rgba(0, 123, 255, 0.1);
+}
+
+/* ========================================
+   MODALS
+   ======================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 2px solid #eee;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.close-modal {
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: 30px 25px;
+    overflow-y: auto;
+    max-height: calc(80vh - 100px);
 }
