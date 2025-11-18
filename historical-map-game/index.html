@@ -41,11 +41,67 @@
     
     <!-- Game Screen (Added in feature/interactive-map branch) -->
     <div id="game-screen" class="screen">
+        <button id="submit-guess-game" type="button">Submit Guess</button>
+        <div id="score">Score: 0</div>
         <div id="map-placeholder">
             <div id="tools">
-                <button id="back-button">Back to Start</button>
+                <!-- Hamburger Menu replacing Back to Start button -->
+                <button id="menu-toggle" class="hamburger-menu" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <div id="time">02:00</div>
                 <div id="score"> Score: 0</div>
+            </div>
+            
+            <!-- Historical Event Question-->
+            <div id="historical-image-container" class="image-minimized">
+              <button id="hint-button" class="hint-btn">💡 Hint</button>
+              <button id="maximize-button" class="maximize-btn">🔍</button>
+            
+              <div id="image-card" class="flippable">
+                <div class="image-front">
+                    <img id="historical-image" src="" alt="Historical event">
+                </div>
+                <div class="image-back">
+                    <p id="hint-text"> This event occurred in a major European city known for its revolutionary history.</p>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        <!-- Menu Navigation (outside map-placeholder) -->
+        <nav id="menu-nav" class="menu-hidden">
+            <ul>
+                <li><button id="menu-home" class="menu-option">Back to Start</button></li>
+                <li><button id="menu-minigame1" class="menu-option">Mini Game 1</button></li>
+                <li><button id="menu-minigame2" class="menu-option">Mini Game 2</button></li>
+            </ul>
+        </nav>
+
+        <!-- Modal windows for mini games -->
+        <div id="minigame1-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Mini Game 1</h2>
+                    <button class="close-modal" data-modal="minigame1-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Mini Game 1 content goes here</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="minigame2-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Mini Game 2</h2>
+                    <button class="close-modal" data-modal="minigame2-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Mini Game 2 content goes here</p>
+                </div>
             </div>
         </div>
     </div>
