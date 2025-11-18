@@ -24,6 +24,7 @@ body {
 }
 
 #start-screen {
+    display: none;
     padding-top: 1rem;
     text-align: center;
     display: flex;
@@ -532,4 +533,47 @@ h1 {
     padding: 30px 25px;
     overflow-y: auto;
     max-height: calc(80vh - 100px);
+}
+
+/* End Game Screen */
+#end-game-screen {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.end-game-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#play-again-button {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+#play-again-button:hover {
+    background: #229954;
+}
+
+#back-to-start-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#back-to-start-button:hover {
+    background: #2980b9;
 }
