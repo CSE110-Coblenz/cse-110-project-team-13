@@ -1,10 +1,23 @@
 import { initMap } from "./map.js";
-import { showStartScreen, showGameScreen, startButton, backButton, submitGuessButton } from "./ui.js";
+import { showStartScreen, showGameScreen, startButton, submitGuessButton } from "./ui.js";
 import './howto.js'
 import { startTimer, stopTimer, resetTimer, handleGuess } from "./game.js";
+import { initializeDragging, loadHistoricalImage } from "./image.js";
+import { initializeMenu } from "./menu.js";
 
 
 window.addEventListener("DOMContentLoaded", () => {
+    console.log('Main: DOMContentLoaded fired');
+
+    initializeMenu();
+
+    initializeDragging();
+    
+    loadHistoricalImage(
+    "./assets/images/events/pyramids.jpg",
+    "These structures were built as tombs for pharaohs."
+    );
+    
     showStartScreen();
 
     startButton.addEventListener("click", () => {
@@ -16,11 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    backButton.addEventListener("click", () => {
-        showStartScreen();
-        stopTimer();
-        resetTimer();
-    });
+
     
     if (submitGuessButton) {
         submitGuessButton.addEventListener("click", (e) => {

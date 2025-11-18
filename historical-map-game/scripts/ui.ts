@@ -1,7 +1,6 @@
 export const startScreen = document.getElementById("start-screen")!;
 export const gameScreen = document.getElementById("game-screen")!;
 export const startButton = document.getElementById("start-button")!;
-export const backButton = document.getElementById("back-button")!;
 export const submitGuessButton = document.getElementById("submit-guess-game")!;
 
 export function showStartScreen() {
