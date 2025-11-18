@@ -9,7 +9,7 @@ body {
     
     display:flex;
     flex-direction: column; 
-    background-image: url(assets/images/map-blurred.png);
+    background-image: url(../assets/images/map-blurred.png);
 
     background-size: cover;
 
