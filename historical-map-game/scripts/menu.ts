@@ -1,5 +1,8 @@
 // menu.ts - Hamburger Menu Module
 // Provides navigation menu with Back to Start and Mini Game options
+import { MatchingGame } from "./matching-game.js";
+
+let mg1: MatchingGame | null = null;
 
 export function initializeMenu(): void {
     console.log('Initializing menu...');
@@ -73,7 +76,7 @@ export function initializeMenu(): void {
         e.preventDefault();
         console.log('Mini game 1 clicked');
         minigame1Modal.classList.add('active');
-        
+        mg1 = new MatchingGame();
         // Close menu after action
         menuToggle.classList.remove('active');
         menuNav.classList.add('menu-hidden');
@@ -89,6 +92,10 @@ export function initializeMenu(): void {
         // Close menu after action
         menuToggle.classList.remove('active');
         menuNav.classList.add('menu-hidden');
+
+        document.addEventListener("DOMContentLoaded", () => {
+            new MatchingGame();
+        });
     });
 
     // Close modal buttons
@@ -102,6 +109,10 @@ export function initializeMenu(): void {
                 if (modal) {
                     modal.classList.remove('active');
                 }
+            }
+            if (modalId === "minigame1-modal" && mg1) {
+                mg1.destroy();
+                mg1 = null;
             }
         });
     });
