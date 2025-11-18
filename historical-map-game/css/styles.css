@@ -534,6 +534,19 @@ h1 {
     max-height: calc(80vh - 100px);
 }
 
+.event-image.correct {
+    border: 3px solid green;
+    background: rgba(0, 255, 0, 0.15);
+}
+
+.event-image.incorrect {
+    border: 3px solid red;
+    background: rgba(255, 0, 0, 0.15);
+}
+
+.event-name.dragging {
+    opacity: 0.6;
+}
 /* STYLES FOR MINIGAME*/
 img {
 
