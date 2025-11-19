@@ -176,6 +176,15 @@ h1, h2, p, button, div, span {
   border-radius: 12px;
   padding: 1rem 1.25rem;
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  font-family: var(--font-main);
+}
+
+#how-to-content {
+    color: var(--dark-grey); 
+}
+
+#how-to-controls {
+    background-color: var(--dark-grey);
 }
 
 #howto-dialog::backdrop {
