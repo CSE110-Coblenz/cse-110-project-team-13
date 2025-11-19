@@ -42,7 +42,7 @@ jobs:
         echo "🧪 Running basic checks..."
         # Check if key files exist
         test -f index.html && echo "✅ index.html exists" || echo "❌ index.html missing"
-        test -f styles.css && echo "✅ styles.css exists" || echo "❌ styles.css missing"
+        test -f css/styles.css && echo "✅ styles.css exists" || echo "❌ styles.css missing"
         test -f scripts/main.ts && echo "✅ main.ts exists" || echo "❌ main.ts missing"
         
     # 6. Build the project
