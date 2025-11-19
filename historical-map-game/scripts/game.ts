@@ -190,6 +190,17 @@ export function handleGuess(): void {
 
   updateScore(Math.round(totalScore));
 
+  //show result screen with guess vs actual location
+  showResultScreen(
+    { lat: guessLat, lng: guessLon },
+    { lat: correctLat, lng: correctLon },
+    distanceKm,
+    Math.round(totalScore)
+  );
+}
+
+//function to advance to next round (called from results screen)
+export function nextRound(): void {
   //move to next event
   const hasNext = pickRandomEvent();
   if (!hasNext) {
