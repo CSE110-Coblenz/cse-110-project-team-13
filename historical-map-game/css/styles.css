@@ -176,6 +176,15 @@ h1, h2, p, button, div, span {
   border-radius: 12px;
   padding: 1rem 1.25rem;
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  font-family: var(--font-main);
+}
+
+#how-to-content {
+    color: var(--dark-grey); 
+}
+
+#how-to-controls {
+    background-color: var(--dark-grey);
 }
 
 #howto-dialog::backdrop {
@@ -483,3 +492,34 @@ img {
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
+
+/* results screen style */ 
+.hidden {
+    display: none !important;
+  }
+  
+#result-screen {
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.6);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 2000;
+}
+
+.result-box {
+background: var(--dark-grey);
+padding: 2rem;
+border-radius: 10px;
+text-align: center;
+width: 300px;
+box-shadow: 0 0 20px rgba(0,0,0,0.3);
+
+}
+
+#result-next {
+    background-color:var(--green);
+    border-radius: 7px;
+}
+  
