@@ -2,6 +2,7 @@
 declare const L: any;
 
 import { map, marker as guessMarker } from "../map.js";
+import { nextRound } from "../game.js";
 
 let actualMarker: any = null;
 
@@ -62,15 +63,23 @@ export function showResultScreen(
   resultScreen.classList.remove("hidden");
 
   const nextBtn = document.getElementById("result-next");
-  nextBtn?.addEventListener("click", () => {
-    resultScreen.classList.add("hidden");
-
-    if (actualMarker) {
-      map.removeLayer(actualMarker);
-      actualMarker = null;
-    }
-
-    console.log("Next round starting...");
+  if (nextBtn) {
+    //remove old event listeners to prevent duplicates
+    const newBtn = nextBtn.cloneNode(true) as HTMLElement;
+    nextBtn.parentNode?.replaceChild(newBtn, nextBtn);
     
-  });
+    newBtn.addEventListener("click", () => {
+      resultScreen.classList.add("hidden");
+
+      if (actualMarker) {
+        map.removeLayer(actualMarker);
+        actualMarker = null;
+      }
+
+      console.log("Next round starting...");
+      
+      //advance to next round
+      nextRound();
+    });
+  }
 }

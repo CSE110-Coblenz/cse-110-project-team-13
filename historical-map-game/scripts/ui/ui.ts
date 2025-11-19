@@ -20,23 +20,36 @@ export function showGameScreen() {
 
 // Function to show End Game Screen with play again button and final score
 export function showEndGameScreen(finalScore: number): void {
+    console.log("showEndGameScreen called with score:", finalScore);
     hideAllScreens();
     
     const finalScoreElement = document.getElementById('final-score');
     if (finalScoreElement) {
         finalScoreElement.textContent = finalScore.toString();
+        console.log("Final score element updated");
+    } else {
+        console.error("Final score element not found!");
     }
     
     const endGameScreen = document.getElementById('end-game-screen');
     if (endGameScreen) {
         endGameScreen.style.display = 'flex';
+        console.log("End game screen displayed");
+    } else {
+        console.error("End game screen element not found!");
     }
 }
 
-// Make sure hideAllScreens includes the end game screen
+// Make sure hideAllScreens includes the end game screen and result screen
 function hideAllScreens(): void {
     const screens = document.querySelectorAll('.screen');
     screens.forEach(screen => {
         (screen as HTMLElement).style.display = 'none';
     });
+    
+    //also hide result screen
+    const resultScreen = document.getElementById('result-screen');
+    if (resultScreen) {
+        resultScreen.classList.add('hidden');
+    }
 }
