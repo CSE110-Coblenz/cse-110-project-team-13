@@ -27,24 +27,31 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
+        cache-dependency-path: 'historical-map-game/package-lock.json'
         
     # 3. Install dependencies
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd historical-map-game
+        npm install
       
     # 4. Run TypeScript compilation check
     - name: TypeScript Compilation Check
-      run: npx tsc --noEmit # tsc to skip the emission of any output files. Turns the compiler into a type-checking-only tool
+      run: |
+        cd historical-map-game
+        npx tsc --noEmit # tsc to skip the emission of any output files. Turns the compiler into a type-checking-only tool
       
     # 5. Run basic tests
     - name: Run Basic Checks
       run: |
         echo "🧪 Running basic checks..."
         # Check if key files exist
-        test -f index.html && echo "✅ index.html exists" || echo "❌ index.html missing"
-        test -f styles.css && echo "✅ styles.css exists" || echo "❌ styles.css missing"
-        test -f scripts/main.ts && echo "✅ main.ts exists" || echo "❌ main.ts missing"
+        test -f historical-map-game/index.html && echo "✅ index.html exists" || echo "❌ index.html missing"
+        test -f historical-map-game/css/styles.css && echo "✅ styles.css exists" || echo "❌ styles.css missing"
+        test -f historical-map-game/scripts/main.ts && echo "✅ main.ts exists" || echo "❌ main.ts missing"
         
     # 6. Build the project
     - name: Build Project
-      run: npm run build
+      run: |
+        cd historical-map-game
+        npm run build
