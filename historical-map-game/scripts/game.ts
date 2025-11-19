@@ -1,8 +1,13 @@
-import { marker } from "./map.js";
+declare const L: any; 
+
+import { map, marker } from "./map.js";
+import { showResultScreen } from "./ui/results.js";
 import { GAME_CONFIG } from "./utils.js";
 
 let timeDisplay: HTMLElement | null = null;
 let scoreDisplay: HTMLElement | null = null;
+
+let actualMarker: any = null; 
 
 //initializes display elements when DOM is ready
 function initDisplays() {
@@ -119,26 +124,25 @@ export function handleGuess(): void {
   console.log("Stopping timer...");
   stopTimer();
 
-  //user's location
   const guessLat = marker.getLatLng().lat;
   const guessLon = marker.getLatLng().lng;
   console.log("Guess location:", guessLat, guessLon);
 
-  //answer location
+ 
   const correctLat = currentEvent.location.latitude;
   const correctLon = currentEvent.location.longitude;
   console.log("Correct location:", correctLat, correctLon);
 
-  //distance calculation
+
   const distanceKm = calculateDistance(guessLat, guessLon, correctLat, correctLon);
   console.log("Distance:", distanceKm, "km");
 
-  //time it took to guess
+  
   const timeTaken = (Date.now() - gameStartTime) / 1000;
   const timeRemaining = GUESS_TIME - timeTaken;
   console.log("Time taken:", timeTaken, "seconds");
 
-  // score = inside radius bonus + distance score + time score
+
   const radiusBonus = distanceKm <= GAME_CONFIG.SCORING.DISTANCE_THRESHOLD ? 50 : 0;
   const distanceScore = Math.max(0, 100 * (1 - distanceKm / GAME_CONFIG.SCORING.MAX_DISTANCE_KM));
   const timeScore = Math.max(0, 50 * (timeRemaining / GUESS_TIME));
@@ -149,4 +153,12 @@ export function handleGuess(): void {
 
   updateScore(Math.round(totalScore));
   console.log("Score updated, current score:", currentScore);
+
+  showResultScreen(
+    { lat: guessLat, lng: guessLon },
+    { lat: correctLat, lng: correctLon },
+    distanceKm,
+    totalScore
+  );
+  
 }

@@ -1,5 +1,5 @@
 import { initMap } from "./map.js";
-import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui.js";
+import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
 import './howto.js'
 import { startTimer, stopTimer, resetTimer, handleGuess } from "./game.js";
 import { initializeDragging, loadHistoricalImage } from "./image.js";
