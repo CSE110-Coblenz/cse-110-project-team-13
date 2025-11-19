@@ -1,7 +1,7 @@
 import { initMap } from "./map.js";
 import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
 import './howto.js'
-import { startTimer, stopTimer, resetTimer, handleGuess } from "./game.js";
+import { startTimer, stopTimer, resetTimer, handleGuess, resetGame } from "./game.js";
 import { initializeDragging, loadHistoricalImage } from "./image.js";
 import { initializeMenu } from "./menu.js";
 
@@ -38,19 +38,21 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Play again button handler
+    //play again button (from end game screen)
     playAgainButton?.addEventListener('click', () => {
-        // Reset game and go to 
-        resetTimer();
-        showGameScreen();
+        console.log("Play again clicked from end game screen");
+        resetGame();
+        stopTimer();
+        showStartScreen();
     });
 
-    // Back to start button handler
+    //back to start button (from game screen)
     const backToStartButton = document.getElementById('back-to-start-button');
     backToStartButton?.addEventListener('click', () => {
-        // Reset game and go to start screen
-        resetTimer();
-        showStartScreen(); // Go back to main menu
+        console.log("Back to start clicked");
+        resetGame();
+        stopTimer();
+        showStartScreen();
     });
 
 

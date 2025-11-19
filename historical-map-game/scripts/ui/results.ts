@@ -63,8 +63,13 @@ export function showResultScreen(
   resultScreen.classList.remove("hidden");
 
   const nextBtn = document.getElementById("result-next");
-  nextBtn?.addEventListener("click", () => {
-    resultScreen.classList.add("hidden");
+  if (nextBtn) {
+    //remove old event listeners to prevent duplicates
+    const newBtn = nextBtn.cloneNode(true) as HTMLElement;
+    nextBtn.parentNode?.replaceChild(newBtn, nextBtn);
+    
+    newBtn.addEventListener("click", () => {
+      resultScreen.classList.add("hidden");
 
       if (actualMarker) {
         map.removeLayer(actualMarker);

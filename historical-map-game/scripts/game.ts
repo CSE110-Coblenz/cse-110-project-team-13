@@ -3,6 +3,7 @@ declare const L: any;
 import { map, marker } from "./map.js";
 import { showResultScreen } from "./ui/results.js";
 import { GAME_CONFIG } from "./utils.js";
+import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
 
 let timeDisplay: HTMLElement | null = null;
 let scoreDisplay: HTMLElement | null = null;
@@ -24,6 +25,22 @@ let currentScore: number = 0;
 let allEvents: any[] = [];
 let usedEventIndices: number[] = [];
 let currentEvent: any = null;
+
+//reset game state
+export async function resetGame(): Promise<void> {
+  currentScore = 0;
+  usedEventIndices = [];
+  currentEvent = null;
+  timeLeft = GUESS_TIME;
+  
+  //clear score display
+  if (scoreDisplay) {
+    scoreDisplay.textContent = "Score: 0";
+  }
+  
+  await loadEvents();
+  console.log("Game state reset");
+}
 
 //first we want to load the events from the JSON file
 async function loadEvents(): Promise<void> {
@@ -78,6 +95,12 @@ export async function startTimer(onTimeUp?: () => void) {
   // Load events if not already loaded
   if (allEvents.length === 0) {
     await loadEvents();
+  }
+  
+  // Pick an event if we don't have one
+  if (!currentEvent) {
+    console.log("No current event, picking one...");
+    pickRandomEvent();
   }
   
   timeLeft = GUESS_TIME;
@@ -201,12 +224,19 @@ export function handleGuess(): void {
 
 //function to advance to next round (called from results screen)
 export function nextRound(): void {
+  console.log("nextRound called");
+  console.log("Used events:", usedEventIndices.length, "Total events:", allEvents.length);
+  
   //move to next event
   const hasNext = pickRandomEvent();
   if (!hasNext) {
-    alert(`Game Over! You've completed all events! Final Score: ${currentScore}`);
-    console.log("No more events! Final score:", currentScore);
+    console.log("No more events! Game complete. Final score:", currentScore);
+    alert(`Game Complete! You finished all events! Final Score: ${currentScore}`);
+    resetGame();
+    stopTimer();
+    showStartScreen();
   } else {
+    console.log("Moving to next event:", currentEvent?.name);
     updateEventImage();
     
     //reset timer for next event
