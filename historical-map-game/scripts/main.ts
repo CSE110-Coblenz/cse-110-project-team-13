@@ -57,6 +57,8 @@ window.addEventListener("DOMContentLoaded", () => {
     
     if (submitGuessButton) {
         submitGuessButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             handleGuess();
             return false;
         });
