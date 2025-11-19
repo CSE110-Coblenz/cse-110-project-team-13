@@ -6,37 +6,37 @@
     <title>History Map Game</title>
     <!-- For leaflet interactive map css -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Start Screen (Added in feature/start-page branch) -->
-    <div id="start-screen">
-
+    <!-- Start Screen (Added in feature/start-page branch) + Added class="screen" in feature/play-again-button-->
+    <div id="start-screen" class="screen">
         <h1>WORLD HISTORY: EVENT PICTURE GUESSER</h1> 
         <button id="start-button" type="button">START</button>
         <button id="how-to-play" type="button"> HOW TO PLAY</button>
     </div>
+
     <!-- HOW TO PLAY INSTRUCTIONS -->
     <dialog id="howto-dialog" aria-labelledby="howto-title">
         <header style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
-          <h2 id="howto-title" style="margin:0">How to play</h2>
-          <form method="dialog">
+            <h2 id="howto-title" style="margin:0">How to play</h2>
+            <form method="dialog">
             <button aria-label="Close">✕</button>
-          </form>
-        </header>
-      
-        <div>
-          <ol>
-            <li> You will be presented a historical image.</li>
-            <li> Click on the map to try to guess where the image occured.</li>
-            <li> The closer you are, the more points you get!.</li>
-          </ol>
-        </div>
-      
-        <form method="dialog" style="margin-top:1rem">
-          <button>Got it</button>
         </form>
-      </dialog>      
+        </header>
+    
+        <div>
+            <ol>
+                <li> You will be presented a historical image.</li>
+                <li> Click on the map to try to guess where the image occured.</li>
+                <li> The closer you are, the more points you get!</li>
+            </ol>
+        </div>
+    
+        <form method="dialog" style="margin-top:1rem">
+            <button>Got it</button>
+        </form>
+    </dialog>      
 
     
     <!-- Game Screen (Added in feature/interactive-map branch) -->
@@ -45,11 +45,104 @@
         <div id="score">Score: 0</div>
         <div id="map-placeholder">
             <div id="tools">
-                <button id="back-button" type="button">Back to Start</button>
+                <!-- Hamburger Menu replacing Back to Start button -->
+                <button id="menu-toggle" class="hamburger-menu" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <div id="time">02:00</div>
+            </div>
+            
+            <!-- Historical Event Question-->
+            <div id="historical-image-container" class="image-minimized">
+                <button id="hint-button" class="hint-btn">💡 Hint</button>
+                <button id="maximize-button" class="maximize-btn">🔍</button>
+                <div id="image-card" class="flippable">
+                    <div class="image-front">
+                        <img id="historical-image" src="" alt="Historical event">
+                    </div>
+                    <div class="image-back">
+                        <p id="hint-text"> This event occurred in a major European city known for its revolutionary history.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Menu Navigation (outside map-placeholder) -->
+        <nav id="menu-nav" class="menu-hidden">
+            <ul>
+                <li><button id="menu-home" class="menu-option">Back to Start</button></li>
+                <li><button id="menu-minigame1" class="menu-option">Mini Game 1</button></li>
+                <li><button id="menu-minigame2" class="menu-option">Mini Game 2</button></li>
+            </ul>
+        </nav>
+
+        <!-- Modal windows for mini games -->
+        <div id="minigame1-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Matching Game!</h2>
+                    <button class="close-modal" data-modal="minigame1-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="matching-game" class="mini-game-screen">
+                        <h2>Match the Event to the Picture!</h2>
+                        <div class="timer">Time: <span id="match-timer">60</span>s</div>
+                        <button id="check-answers" class="check-btn">Check Answers</button>
+                        <button id="play-again" class="play-again-btn">Play Again</button>
+                        
+                        <div class="matching-area">
+                            <div class="images-side">
+                                <div class="event-image" data-event-id="1">
+                                    <img src="/assets/images/events/pyramids.jpg" alt="Historical event">
+                                </div>
+                                <div class="event-image" data-event-id="2">
+                                    <img src="/assets/images/events/roman_republic.jpg" alt="Historical event">
+                                </div>
+                                <div class="event-image" data-event-id="3">
+                                    <img src="/assets/images/events/trojanwar.jpg" alt="Historical event">
+                                </div>
+                            </div>
+                            
+                            <div class="names-side">
+                                <div class="event-name" data-event-id="2">Battle of Hastings</div>
+                                <div class="event-name" data-event-id="1">Pyramids of Giza</div>
+                                <div class="event-name" data-event-id="3">Fall of Berlin Wall</div>
+                            </div>
+                        </div>
+                        
+                        <div class="score">Matches: <span id="match-score">0</span>/3</div>
+                </div>
+            </div>
+        </div>
+    
+
+        <div id="minigame2-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Mini Game 2</h2>
+                    <button class="close-modal" data-modal="minigame2-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Mini Game 2 content goes here</p>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- End Game Screen + Final Score Results -->
+    <div id="end-game-screen" class="screen">
+        <div class="end-game-content">
+            <h2>Game Complete! 🎉</h2>
+            <p>Your Final Score: <span id="final-score">0</span></p>
+            <div class="end-game-buttons">
+                <button id="play-again-button">Play Again</button>
+                <button id="back-to-start-button">Back to Start</button>
+            </div>
+        </div>
+    </div>  
     
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

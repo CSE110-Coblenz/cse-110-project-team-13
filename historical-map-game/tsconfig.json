@@ -9,6 +9,7 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
+        "lib": ["ES6", "DOM"],
         "resolveJsonModule": true
     },
     // scripts/**/*.ts tells TS which files to compile, so all .ts files
