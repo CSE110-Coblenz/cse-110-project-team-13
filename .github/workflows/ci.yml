@@ -49,8 +49,14 @@ jobs:
         test -f historical-map-game/index.html && echo "✅ index.html exists" || echo "❌ index.html missing"
         test -f historical-map-game/css/styles.css && echo "✅ styles.css exists" || echo "❌ styles.css missing"
         test -f historical-map-game/scripts/main.ts && echo "✅ main.ts exists" || echo "❌ main.ts missing"
+    
+    # 6. Run game logic tests
+    - name: Run Game Logic Tests
+      run: |
+        cd historical-map-game
+        npm test
         
-    # 6. Build the project
+    # 7. Build the project
     - name: Build Project
       run: |
         cd historical-map-game
