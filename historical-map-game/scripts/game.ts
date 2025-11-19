@@ -192,6 +192,8 @@ export function handleGuess(): void {
     alert(`Game Over! You've completed all events! Final Score: ${currentScore}`);
     console.log("No more events! Final score:", currentScore);
   } else {
+    updateEventImage();
+    
     //reset timer for next event
     timeLeft = GUESS_TIME;
     updateTimer();
@@ -205,5 +207,16 @@ export function handleGuess(): void {
         stopTimer();
       }
     }, 1000);
+  }
+}
+
+//update the image to match the new event
+function updateEventImage(): void {
+  if (!currentEvent) return;
+  
+  const imageElement = document.getElementById("historical-image") as HTMLImageElement;
+  if (imageElement && currentEvent.image) {
+    imageElement.src = currentEvent.image;
+    console.log("Updated image to:", currentEvent.image);
   }
 }
