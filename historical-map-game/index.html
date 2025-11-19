@@ -21,11 +21,11 @@
         <header style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
             <h2 id="howto-title" style="margin:0">How to play</h2>
             <form method="dialog">
-            <button aria-label="Close">✕</button>
+            <button id="how-to-controls" aria-label="Close">✕</button>
         </form>
         </header>
     
-        <div>
+        <div id="how-to-content">
             <ol>
                 <li> You will be presented a historical image.</li>
                 <li> Click on the map to try to guess where the image occured.</li>
@@ -34,7 +34,7 @@
         </div>
     
         <form method="dialog" style="margin-top:1rem">
-            <button>Got it</button>
+            <button id="how-to-controls" >Got it</button>
         </form>
     </dialog>      
 
@@ -142,7 +142,19 @@
                 <button id="back-to-start-button">Back to Start</button>
             </div>
         </div>
-    </div>  
+    </div> 
+    <!-- results page -->
+    <section id="result-screen" class="hidden">
+        <div class="result-box">
+          <h2>Round Results</h2>
+      
+          <p id="result-distance"></p>
+          <p id="result-score"></p>
+          <p id="result-feedback"></p>
+      
+          <button id="result-next">Next Round</button>
+        </div>
+      </section>
     
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
