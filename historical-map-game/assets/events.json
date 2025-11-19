@@ -50,8 +50,8 @@
           "story": "Around 1750 BCE, King Hammurabi of Babylon established one of the earliest known sets of written laws. Inscribed on a basalt stele, the Code of Hammurabi outlined legal standards, punishments, and social order in Mesopotamian society.",
           "image": "assets/images/events/hammurabi.jpg",
           "location": {
-              "latitude": 33.1000,
-              "longitude": 44.4000,
+              "latitude": 32.5364,
+              "longitude": 44.4200,
               "city": "Babylon",
               "country": "Iraq"
           },
@@ -100,7 +100,158 @@
         "hint-2": "It introduced a system led by consuls and a senate.",
         "hint-3": "It laid the foundation for what would become the Roman Empire.",
         "tags": ["rome", "republic", "ancient", "government", "revolution"]
-      }
-      
-  ]
+    },
+    {
+        "id": 6,
+        "name": "Construction of the Parthenon",
+        "story": "Between 447 and 432 BCE, the ancient Athenians built the Parthenon atop the Acropolis under the leadership of Pericles. Dedicated to the goddess Athena, the temple symbolized the height of Classical Greek architecture and Athenian power.",
+        "image": "assets/images/events/parthenon.jpg",
+        "location": {
+        "latitude": 37.9715,
+        "longitude": 23.7267,
+        "city": "Athens",
+        "country": "Greece"
+        },
+        "year": "447–432 BCE",
+        "category": "Ancient",
+        "difficulty": "medium",
+        "hint-1": "A temple dedicated to the goddess Athena.",
+        "hint-2": "It stands atop a famous hill overlooking Athens.",
+        "hint-3": "Its architecture defines the Classical Greek style.",
+        "tags": ["greece", "athens", "architecture", "ancient", "parthenon"]
+    },
+    {
+        "id": 7,
+        "name": "Battle of Issus",
+        "story": "In 333 BCE, Alexander the Great faced the Persian king Darius III near the town of Issus in southern Anatolia. Despite being outnumbered, Alexander’s tactical brilliance led to a decisive victory, forcing Darius to flee and marking a major turning point in the conquest of the Persian Empire.",
+        "image": "assets/images/events/battle_issus.jpg",
+        "location": {
+            "latitude": 36.5870,
+            "longitude": 36.1733,
+            "city": "Issus",
+            "country": "Ancient Anatolia (modern Turkey)"
+        },
+        "year": "333 BCE",
+        "category": "Ancient",
+        "difficulty": "hard",
+        "hint-1": "This battle forced the Persian king Darius III to flee.",
+        "hint-2": "It occurred in southern Anatolia near the Mediterranean coast.",
+        "hint-3": "It was one of Alexander the Great’s most decisive early victories.",
+        "tags": ["greece", "macedon", "persia", "alexander", "battle", "hellenistic"]
+    },  
+    {
+        "id": 8,
+        "name": "Founding of the Qin Dynasty and the Terracotta Army",
+        "story": "In 221 BCE, Qin Shi Huang unified the warring states and declared himself the First Emperor of China, founding the Qin Dynasty. Near his mausoleum, thousands of clay soldiers—today called the Terracotta Army—were buried to protect him in the afterlife.",
+        "image": "assets/images/events/terracotta.jpg",
+        "location": {
+        "latitude": 34.3845,
+        "longitude": 109.2783,
+        "city": "Xi'an",
+        "country": "China"
+        },
+        "year": "221 BCE",
+        "category": "Ancient",
+        "difficulty": "medium",
+        "hint-1": "This dynasty unified China for the first time.",
+        "hint-2": "Its emperor began building the Great Wall.",
+        "hint-3": "Thousands of clay soldiers guard his tomb.",
+        "tags": ["china", "qin", "emperor", "terracotta", "ancient"]
+    },
+    {
+        "id": 9,
+        "name": "Julius Caesar Crosses the Rubicon",
+        "story": "In 49 BCE, Julius Caesar crossed the Rubicon River with his army, defying the Roman Senate and igniting a civil war. The act became symbolic of making an irreversible decision.",
+        "image": "assets/images/events/rubicon.jpg",
+        "location": {
+        "latitude": 44.2197,
+        "longitude": 12.4386,
+        "city": "Rimini (near the Rubicon)",
+        "country": "Italy"
+        },
+        "year": "49 BCE",
+        "category": "Ancient",
+        "difficulty": "easy",
+        "hint-1": "This act started a Roman civil war.",
+        "hint-2": "It is associated with the phrase 'the die is cast'.",
+        "hint-3": "It involved crossing a small river in northern Italy.",
+        "tags": ["rome", "caesar", "civil war", "ancient", "rubicon"]
+    },
+    {
+        "id": 10,
+        "name": "Assassination of Julius Caesar",
+        "story": "In 44 BCE, Julius Caesar was assassinated by Roman senators led by Brutus and Cassius. The attack took place during a Senate meeting, drastically altering the future of the Roman Republic.",
+        "image": "assets/images/events/caesar_assassination.jpg",
+        "location": {
+        "latitude": 41.8955,
+        "longitude": 12.4768,
+        "city": "Rome",
+        "country": "Italy"
+        },
+        "year": "44 BCE",
+        "category": "Ancient",
+        "difficulty": "medium",
+        "hint-1": "It happened on the Ides of March.",
+        "hint-2": "The victim was stabbed by political rivals.",
+        "hint-3": "This event paved the way for the Roman Empire.",
+        "tags": ["rome", "caesar", "assassination", "ancient", "senate"]
+    },
+    {
+        "id": 11,
+        "name": "Birth of Jesus of Nazareth",
+        "story": "Around 4 BCE, Jesus of Nazareth was born in Bethlehem during the reign of Herod the Great. His life and teachings later became the foundation of Christianity.",
+        "image": "assets/images/events/jesus_birth.jpg",
+        "location": {
+        "latitude": 31.7054,
+        "longitude": 35.2024,
+        "city": "Bethlehem",
+        "country": "Judea (modern Palestine)"
+        },
+        "year": "c. 4 BCE",
+        "category": "Ancient",
+        "difficulty": "easy",
+        "hint-1": "This birth is celebrated on December 25 by many.",
+        "hint-2": "It took place in a town south of Jerusalem.",
+        "hint-3": "It is central to the Christian faith.",
+        "tags": ["jesus", "birth", "bethlehem", "religion", "ancient"]
+    },
+    {
+        "id": 12,
+        "name": "Eruption of Mount Vesuvius and Destruction of Pompeii",
+        "story": "In 79 CE, Mount Vesuvius erupted catastrophically, burying the Roman cities of Pompeii and Herculaneum under ash and pumice. The disaster preserved the towns remarkably well, providing an unparalleled view of Roman daily life.",
+        "image": "assets/images/events/pompeii.jpg",
+        "location": {
+        "latitude": 40.7497,
+        "longitude": 14.4840,
+        "city": "Pompeii",
+        "country": "Italy"
+        },
+        "year": "79 CE",
+        "category": "Ancient",
+        "difficulty": "easy",
+        "hint-1": "A volcanic eruption froze an entire city in time.",
+        "hint-2": "The volcano is located near the Bay of Naples.",
+        "hint-3": "Ash and pumice buried the inhabitants and buildings.",
+        "tags": ["volcano", "rome", "pompeii", "vesuvius", "ancient"]
+    },
+    {
+        "id": 13,
+        "name": "Construction of the Colosseum",
+        "story": "Completed in 80 CE under Emperor Titus, the Colosseum became Rome’s greatest amphitheater. It hosted gladiatorial games, public spectacles, and massive crowds, symbolizing the engineering might of the Roman Empire.",
+        "image": "assets/images/events/colosseum.jpg",
+        "location": {
+        "latitude": 41.8902,
+        "longitude": 12.4922,
+        "city": "Rome",
+        "country": "Italy"
+        },
+        "year": "80 CE",
+        "category": "Ancient",
+        "difficulty": "easy",
+        "hint-1": "This structure hosted gladiator fights.",
+        "hint-2": "It is one of the most famous landmarks in Rome.",
+        "hint-3": "It could hold tens of thousands of spectators.",
+        "tags": ["rome", "colosseum", "architecture", "gladiator", "ancient"]
+    }
+    ]
 }
