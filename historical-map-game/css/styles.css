@@ -442,14 +442,17 @@ img {
 }
 
 /* END GAME */
-#end-game-screen { display:none; }
+#end-game-screen { 
+    display:none;
+    
+}
 
 .end-game-content {
-    background:white;
-    padding:3rem;
-    border-radius:12px;
-    text-align:center;
-    color:black;
+    background: #333333;
+    color: var(--black) !important;
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
 }
 
 #play-again-button {
