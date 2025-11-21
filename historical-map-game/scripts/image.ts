@@ -23,6 +23,7 @@ export function isImageLockedInPlace(): boolean {
 
 // Flip image to show hint
 export function toggleHint(e: Event) {
+  hintText
   e.stopPropagation();
   e.preventDefault();
   console.log('Toggle hint clicked');

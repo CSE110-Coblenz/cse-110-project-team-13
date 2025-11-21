@@ -1,7 +1,7 @@
 import { initMap } from "./map.js";
 import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
 import './howto.js'
-import { startTimer, stopTimer, resetTimer, handleGuess, resetGame } from "./game.js";
+import { startTimer, stopTimer, resetTimer, handleGuess, resetGame, nextRound } from "./game.js";
 import { initializeDragging, loadHistoricalImage } from "./image.js";
 import { initializeMenu } from "./menu.js";
 
@@ -19,14 +19,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     initializeDragging();
     
-    loadHistoricalImage(
-    "./assets/images/events/pyramids.jpg",
-    "These structures were built as tombs for pharaohs."
-    );
-    
     showStartScreen();
 
-
+    
     // Start game button handler
     startButton.addEventListener("click", () => {
         showGameScreen();

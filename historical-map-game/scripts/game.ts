@@ -4,6 +4,7 @@ import { map, marker } from "./map.js";
 import { showResultScreen } from "./ui/results.js";
 import { GAME_CONFIG } from "./utils.js";
 import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
+import { setHeapSnapshotNearHeapLimit } from "v8";
 
 let timeDisplay: HTMLElement | null = null;
 let scoreDisplay: HTMLElement | null = null;
@@ -57,8 +58,8 @@ async function loadEvents(): Promise<void> {
 
 //pick a random event that hasn't been used yet
 function pickRandomEvent(): boolean {
-  //if our list is the length of the events, then we're done
-  if (usedEventIndices.length >= allEvents.length) {
+  //Show 10 events, then we are done.
+  if (usedEventIndices.length >= 10) {
     return false;
   }
   
@@ -71,6 +72,7 @@ function pickRandomEvent(): boolean {
   usedEventIndices.push(randomIndex);
   currentEvent = allEvents[randomIndex];
   console.log("Picked new event:", currentEvent.name, "- Event #" + usedEventIndices.length);
+  updateEventImage();
   return true;
 }
 
@@ -231,7 +233,7 @@ export function nextRound(): void {
   const hasNext = pickRandomEvent();
   if (!hasNext) {
     console.log("No more events! Game complete. Final score:", currentScore);
-    alert(`Game Complete! You finished all events! Final Score: ${currentScore}`);
+    alert(`Game Complete! You finished! Final Score: ${currentScore}`);
     resetGame();
     stopTimer();
     showStartScreen();
@@ -260,8 +262,10 @@ function updateEventImage(): void {
   if (!currentEvent) return;
   
   const imageElement = document.getElementById("historical-image") as HTMLImageElement;
+  const hintTextElement = document.getElementById("hint-text") as HTMLElement;
   if (imageElement && currentEvent.image) {
     imageElement.src = currentEvent.image;
+    hintTextElement.textContent = currentEvent["hint-1"];
     console.log("Updated image to:", currentEvent.image);
   }
 }
