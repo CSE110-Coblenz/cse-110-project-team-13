@@ -252,6 +252,310 @@
         "hint-2": "It is one of the most famous landmarks in Rome.",
         "hint-3": "It could hold tens of thousands of spectators.",
         "tags": ["rome", "colosseum", "architecture", "gladiator", "ancient"]
-    }
+    },
+    {
+        "id": 14,
+        "name": "Unification of Japan under Tokugawa Ieyasu",
+        "story": "Following decades of internal warfare, Tokugawa Ieyasu defeated rival clans, establishing the Tokugawa Shogunate and ushering in over 250 years of stability in Japan.",
+        "image": "assets/images/events/tokugawa.jpg",
+        "location": {
+            "latitude": 35.4437,
+            "longitude": 139.6380,
+            "city": "Yokohama (near Edo/Tokyo)",
+            "country": "Japan"
+        },
+        "year": "1600",
+        "category": "Early Modern",
+        "difficulty": "hard",
+        "hint-1": "The decisive battle was Sekigahara.",
+        "hint-2": "This began a long era of isolation.",
+        "hint-3": "The capital became Edo, now a major modern city.",
+        "tags": ["japan", "tokugawa", "edo", "samurai"]
+    },
+    {
+        "id": 15,
+        "name": "Assassination of Archduke Franz Ferdinand",
+        "story": "On June 28, 1914, Archduke Franz Ferdinand of Austria and his wife Sophie were assassinated in Sarajevo by Gavrilo Princip, a member of the Black Hand movement. The incident directly triggered World War I.",
+        "image": "assets/images/events/franz_ferdinand_car.jpg",
+        "location": {
+        "latitude": 43.8570,
+        "longitude": 18.4289,
+        "city": "Sarajevo",
+        "country": "Bosnia and Herzegovina"
+        },
+        "year": "1914",
+        "category": "Modern",
+        "difficulty": "medium",
+        "hint-1": "This assassination sparked World War I.",
+        "hint-2": "It happened in Sarajevo.",
+        "hint-3": "The target was heir to the Austro-Hungarian throne.",
+        "tags": ["world war i", "europe", "assassination", "austria"]
+    },
+    {
+        "id": 16,
+        "name": "Hindenburg Disaster",
+        "story": "On May 6, 1937, the German passenger airship LZ 129 Hindenburg caught fire and was destroyed while attempting to land in New Jersey. The iconic photograph of the airship engulfed in flames became one of the most famous images of the 20th century.",
+        "image": "assets/images/events/hindenburg_disaster.jpg",
+        "location": {
+        "latitude": 40.0324,
+        "longitude": -74.3537,
+        "city": "Lakehurst",
+        "country": "United States"
+        },
+        "year": "1937",
+        "category": "Modern",
+        "difficulty": "easy",
+        "hint-1": "It involved a German airship.",
+        "hint-2": "The disaster occurred while docking.",
+        "hint-3": "The photo shows a massive airship engulfed in flames.",
+        "tags": ["aviation", "disaster", "usa", "germany"]
+    },
+    {
+        "id": 17,
+        "name": "Storming of the Winter Palace",
+        "story": "In October 1917, Bolshevik forces stormed the Winter Palace in Petrograd, overthrowing the Provisional Government. Although many of the images were staged afterward, the event is widely documented and symbolized the rise of Soviet power.",
+        "image": "assets/images/events/winter_palace_storming.jpg",
+        "location": {
+        "latitude": 59.9398,
+        "longitude": 30.3158,
+        "city": "Saint Petersburg",
+        "country": "Russia"
+        },
+        "year": "1917",
+        "category": "Modern",
+        "difficulty": "hard",
+        "hint-1": "This event marked the rise of the Bolsheviks.",
+        "hint-2": "It took place in Russia’s imperial capital.",
+        "hint-3": "It is associated with the October Revolution.",
+        "tags": ["russia", "revolution", "bolsheviks", "soviet"]
+    },
+    {
+        "id": 18,
+        "name": "Attack on Pearl Harbor",
+        "story": "On December 7, 1941, the Imperial Japanese Navy launched a surprise attack on Pearl Harbor in Hawaii. Photographs of the burning battleships shocked the world and led to the United States entering World War II.",
+        "image": "assets/images/events/pearl_harbor_attack.jpg",
+        "location": {
+        "latitude": 21.3653,
+        "longitude": -157.9360,
+        "city": "Pearl Harbor",
+        "country": "United States"
+        },
+        "year": "1941",
+        "category": "Modern",
+        "difficulty": "easy",
+        "hint-1": "This attack led the U.S. to enter World War II.",
+        "hint-2": "Battleships were photographed burning.",
+        "hint-3": "It occurred in Hawaii.",
+        "tags": ["wwii", "usa", "japan", "naval", "attack"]
+    },
+    {
+        "id": 19,
+        "name": "D-Day Landings",
+        "story": "On June 6, 1944, Allied forces stormed the beaches of Normandy during World War II. Robert Capa’s photographs of soldiers landing under fire remain some of the most striking images of the war.",
+        "image": "assets/images/events/d_day_landings.jpg",
+        "location": {
+        "latitude": 49.3333,
+        "longitude": -0.5167,
+        "city": "Omaha Beach",
+        "country": "France"
+        },
+        "year": "1944",
+        "category": "Modern",
+        "difficulty": "medium",
+        "hint-1": "This was the largest amphibious invasion in history.",
+        "hint-2": "It occurred on the coast of Normandy.",
+        "hint-3": "Famous photographs show soldiers struggling ashore.",
+        "tags": ["wwii", "allies", "france", "invasion"]
+    },
+    {
+        "id": 20,
+        "name": "Raising a Flag Over the Reichstag",
+        "story": "On May 2, 1945, Soviet troops raised the flag of the USSR above the Reichstag in Berlin. The photograph became a symbol of the defeat of Nazi Germany and the Soviet victory in Europe.",
+        "image": "assets/images/events/reichstag_flag.jpg",
+        "location": {
+        "latitude": 52.5186,
+        "longitude": 13.3762,
+        "city": "Berlin",
+        "country": "Germany"
+        },
+        "year": "1945",
+        "category": "Modern",
+        "difficulty": "medium",
+        "hint-1": "It symbolizes the fall of Nazi Germany.",
+        "hint-2": "The Soviet flag is prominently featured.",
+        "hint-3": "It happened in Berlin.",
+        "tags": ["wwii", "soviet", "germany", "berlin"]
+    },
+    {
+        "id": 21,
+        "name": "Partition of India",
+        "story": "In 1947, British India was divided into two independent nations: India and Pakistan. Mass migration and communal violence followed, and iconic photographs show overcrowded trains carrying refugees.",
+        "image": "assets/images/events/partition_trains.jpg",
+        "location": {
+        "latitude": 31.3260,
+        "longitude": 75.5762,
+        "city": "Amritsar",
+        "country": "India"
+        },
+        "year": "1947",
+        "category": "Modern",
+        "difficulty": "hard",
+        "hint-1": "This event involved massive migration.",
+        "hint-2": "It resulted in the creation of two nations.",
+        "hint-3": "Famous photos show overcrowded trains.",
+        "tags": ["india", "pakistan", "partition", "migration"]
+    },
+    {
+        "id": 22,
+        "name": "Incheon Landing",
+        "story": "On September 15, 1950, UN forces led by General Douglas MacArthur conducted a surprise amphibious landing at Incheon during the Korean War. The operation was photographed extensively and marked a major turning point.",
+        "image": "assets/images/events/incheon_landing.jpg",
+        "location": {
+        "latitude": 37.4563,
+        "longitude": 126.7052,
+        "city": "Incheon",
+        "country": "South Korea"
+        },
+        "year": "1950",
+        "category": "Modern",
+        "difficulty": "medium",
+        "hint-1": "This landing reversed early war losses.",
+        "hint-2": "It was led by General MacArthur.",
+        "hint-3": "It occurred during the Korean War.",
+        "tags": ["korea", "war", "macarthur", "un"]
+    },
+    {
+        "id": 23,
+        "name": "Cuban Missile Crisis U-2 Photographs",
+        "story": "In October 1962, U-2 reconnaissance aircraft photographed Soviet missile installations in Cuba. These images triggered the Cuban Missile Crisis, bringing the world to the brink of nuclear war.",
+        "image": "assets/images/events/u2_cuba_missiles.jpg",
+        "location": {
+        "latitude": 22.9910,
+        "longitude": -82.1500,
+        "city": "San Cristóbal",
+        "country": "Cuba"
+        },
+        "year": "1962",
+        "category": "Modern",
+        "difficulty": "hard",
+        "hint-1": "Spy photos revealed missile sites.",
+        "hint-2": "This triggered a major Cold War standoff.",
+        "hint-3": "It involved the U.S., USSR, and Cuba.",
+        "tags": ["cold war", "usa", "cuba", "soviet"]
+    },
+    {
+        "id": 24,
+        "name": "The Napalm Girl",
+        "story": "On June 8, 1972, a South Vietnamese plane mistakenly dropped napalm on Trang Bang. The photograph of a young girl, Phan Thi Kim Phuc, running in agony became one of the most unforgettable images of the Vietnam War.",
+        "image": "assets/images/events/napalm_girl.jpg",
+        "location": {
+        "latitude": 11.0200,
+        "longitude": 106.3630,
+        "city": "Trang Bang",
+        "country": "Vietnam"
+        },
+        "year": "1972",
+        "category": "Modern",
+        "difficulty": "medium",
+        "hint-1": "The photograph shows children running in terror.",
+        "hint-2": "It is one of the most famous images of the Vietnam War.",
+        "hint-3": "Napalm was accidentally dropped.",
+        "tags": ["vietnam", "war", "photography"]
+    },
+    {
+        "id": 25,
+        "name": "Tank Man",
+        "story": "On June 5, 1989, during the Tiananmen Square protests, a lone man stood in front of a column of tanks, creating one of the most iconic images of peaceful resistance in history.",
+        "image": "assets/images/events/tank_man.jpg",
+        "location": {
+        "latitude": 39.9087,
+        "longitude": 116.3975,
+        "city": "Beijing",
+        "country": "China"
+        },
+        "year": "1989",
+        "category": "Modern",
+        "difficulty": "easy",
+        "hint-1": "This image shows a lone man blocking tanks.",
+        "hint-2": "It took place in a large public square.",
+        "hint-3": "It occurred during pro-democracy protests.",
+        "tags": ["china", "protest", "tanks", "resistance"]
+    },
+    {
+        "id": 26,
+        "name": "Fall of the Berlin Wall",
+        "story": "In November 1989, East and West Berliners gathered to dismantle the Berlin Wall. Photographs show people climbing, hammering, and celebrating its collapse.",
+        "image": "assets/images/events/berlin_wall_fall.jpg",
+        "location": {
+        "latitude": 52.5163,
+        "longitude": 13.3777,
+        "city": "Berlin",
+        "country": "Germany"
+        },
+        "year": "1989",
+        "category": "Modern",
+        "difficulty": "easy",
+        "hint-1": "This event reunited a divided city.",
+        "hint-2": "People celebrated by breaking concrete.",
+        "hint-3": "It marked the end of the Cold War era.",
+        "tags": ["germany", "cold war", "berlin", "wall"]
+    },
+    {
+        "id": 27,
+        "name": "Rwandan Genocide",
+        "story": "In 1994, mass violence erupted in Rwanda, resulting in the deaths of an estimated 800,000 Tutsi and moderate Hutu. Photographs documented refugees, roadblocks, and the humanitarian crisis.",
+        "image": "assets/images/events/rwanda_genocide.jpg",
+        "location": {
+        "latitude": -1.9403,
+        "longitude": 29.8739,
+        "city": "Kigali",
+        "country": "Rwanda"
+        },
+        "year": "1994",
+        "category": "Modern",
+        "difficulty": "hard",
+        "hint-1": "This tragedy unfolded in Central Africa.",
+        "hint-2": "It involved mass ethnic violence.",
+        "hint-3": "Photographs show refugee columns and devastation.",
+        "tags": ["africa", "genocide", "rwanda"]
+    },
+    {
+        "id": 28,
+        "name": "September 11 Attacks",
+        "story": "On September 11, 2001, coordinated terrorist attacks struck the United States, including the World Trade Center. Photographs show the towers burning after the hijacked planes struck.",
+        "image": "assets/images/events/9_11_attack.jpg",
+        "location": {
+        "latitude": 40.7115,
+        "longitude": -74.0134,
+        "city": "New York City",
+        "country": "United States"
+        },
+        "year": "2001",
+        "category": "Modern",
+        "difficulty": "easy",
+        "hint-1": "The event involved hijacked airplanes.",
+        "hint-2": "It struck two massive skyscrapers.",
+        "hint-3": "It occurred in the United States’ largest city.",
+        "tags": ["usa", "terrorism", "world trade center"]
+    },
+    {
+        "id": 29,
+        "name": "2004 Indian Ocean Tsunami",
+        "story": "On December 26, 2004, a massive undersea megathrust earthquake triggered one of the deadliest tsunamis in history, devastating coastlines across Indonesia, Thailand, Sri Lanka, and India. Many photographs captured the waves hitting coastal cities.",
+        "image": "assets/images/events/indian_ocean_tsunami.jpg",
+        "location": {
+        "latitude": 5.5483,
+        "longitude": 95.3238,
+        "city": "Banda Aceh",
+        "country": "Indonesia"
+        },
+        "year": "2004",
+        "category": "Modern",
+        "difficulty": "medium",
+        "hint-1": "A massive earthquake triggered this disaster.",
+        "hint-2": "Southeast Asia was heavily affected.",
+        "hint-3": "It is one of the most photographed natural disasters in history.",
+        "tags": ["asia", "tsunami", "natural disaster", "earthquake"]
+    }  
     ]
 }
