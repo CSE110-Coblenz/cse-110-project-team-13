@@ -67,6 +67,12 @@ h1, h2, p, button, div, span {
     cursor: pointer;
 }
 
+#how-to-controls {
+    background-color: var(--dark-grey) !important;
+    color: var(--white) !important;
+    cursor: pointer;
+}
+
 /* ======================== SUBMIT GUESS BUTTON ======================== */
 #submit-guess-game {
     position: fixed;
@@ -181,10 +187,6 @@ h1, h2, p, button, div, span {
 
 #how-to-content {
     color: var(--dark-grey); 
-}
-
-#how-to-controls {
-    background-color: var(--dark-grey);
 }
 
 #howto-dialog::backdrop {
