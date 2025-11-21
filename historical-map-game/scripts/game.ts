@@ -239,7 +239,7 @@ export function nextRound(): void {
     showStartScreen();
   } else {
     console.log("Moving to next event:", currentEvent?.name);
-    updateEventImage();
+    //updateEventImage(); Not neccesary because we are calling this in pickRandomEvent()
     
     //reset timer for next event
     timeLeft = GUESS_TIME;
