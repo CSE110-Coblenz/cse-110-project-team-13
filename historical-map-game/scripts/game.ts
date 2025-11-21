@@ -27,6 +27,7 @@ let allEvents: any[] = [];
 let usedEventIndices: number[] = [];
 let currentEvent: any = null;
 
+
 //reset game state
 export async function resetGame(): Promise<void> {
   currentScore = 0;
@@ -115,7 +116,13 @@ export async function startTimer(onTimeUp?: () => void) {
 
     if (timeLeft <= 0) {
       stopTimer();
-      if (onTimeUp) onTimeUp();
+      if(!marker) {
+        resetGame();
+        showStartScreen();
+      } //safety reset if no marker
+      else{
+        handleGuess();
+      }
     }
   }, 1000);
 }
@@ -233,10 +240,11 @@ export function nextRound(): void {
   const hasNext = pickRandomEvent();
   if (!hasNext) {
     console.log("No more events! Game complete. Final score:", currentScore);
-    alert(`Game Complete! You finished! Final Score: ${currentScore}`);
-    resetGame();
+    showEndGameScreen(currentScore);
+    
+    //resetGame(); not neccesary, the end game screen handles this.
     stopTimer();
-    showStartScreen();
+    //showStartScreen(); not neccesary, the end game screen handles this.
   } else {
     console.log("Moving to next event:", currentEvent?.name);
     //updateEventImage(); Not neccesary because we are calling this in pickRandomEvent()
@@ -252,6 +260,13 @@ export function nextRound(): void {
       updateTimer();
       if (timeLeft <= 0) {
         stopTimer();
+        if(!marker) {
+          resetGame();
+          showStartScreen();
+        } //safety reset if no marker
+        else{
+          handleGuess();
+        }
       }
     }, 1000);
   }
