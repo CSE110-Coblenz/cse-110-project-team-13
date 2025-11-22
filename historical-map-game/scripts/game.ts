@@ -9,8 +9,43 @@ import { setHeapSnapshotNearHeapLimit } from "v8";
 let timeDisplay: HTMLElement | null = null;
 let scoreDisplay: HTMLElement | null = null;
 
-let actualMarker: any = null; 
+type Coordinate = {
+  lat:number; lng:number; 
+}
 
+let actualMarker: any = null; 
+let comparisonline: any = null; 
+let guessMarker:any = null; 
+let distanceLabel: any = null; 
+
+function showGuessComparison(guess:Coordinate, actual:Coordinate) {
+  if(!map) return; 
+
+  const guessLatLng = L.latLng(guess.lat, guess.lng);
+  const actualLatLng = L.latLng(actual.lat, actual.lng);
+
+  if(comparisonline) {
+    map.removeLayer(comparisonline)
+    comparisonline = null
+  }
+
+  if(guessMarker) {
+    map.removeLayer(guessMarker)
+    guessMarker = null
+  }
+
+  if(actualMarker) {
+    map.removeLayer(actualMarker)
+    actualMarker = null
+  }
+
+  if(distanceLabel) {
+    map.removeLayer(distanceLabel)
+    distanceLabel = null
+  }
+  //add markers 
+
+}
 //initializes display elements when DOM is ready
 function initDisplays() {
   timeDisplay = document.getElementById("time");
