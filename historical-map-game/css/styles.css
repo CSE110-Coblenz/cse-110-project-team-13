@@ -47,15 +47,6 @@ h1, h2, p, button, div, span {
 }
 
 /* ======================== START SCREEN ======================== */
-#start-screen {
-    display: none;
-    padding-top: 1rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-}
 
 #start-button, #how-to-play {
     padding: 1rem 4rem;
@@ -1042,14 +1033,6 @@ img {
     padding: 12px 24px;
     border-radius: 6px;
     cursor: pointer;
-}
-#start-screen h1 {
-    text-align: center;
-    padding: 1rem 2rem;
-    font-size: 2rem;
-    background: var(--dark-grey);
-    color: var(--white);
-    border-radius: 10px;
 }
 
 
