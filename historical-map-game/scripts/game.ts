@@ -45,6 +45,7 @@ function showGuessComparison(guess:Coordinate, actual:Coordinate) {
   }
   //add markers 
 
+
 }
 //initializes display elements when DOM is ready
 function initDisplays() {
