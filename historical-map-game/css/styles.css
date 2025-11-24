@@ -98,6 +98,16 @@ h1, h2, p, button, div, span {
     user-select: none;
 }
 
+#start-button:hover {
+    background: #c0392b;
+    transform:scale(1.1); 
+}
+
+#how-to-play:hover {
+    background: #c0392b;
+    transform:scale(1.1);
+}
+
 #how-to-controls {
     background-color: var(--dark-grey) !important;
     color: var(--white) !important;
@@ -504,6 +514,7 @@ img {
     padding: 12px 24px;
     border-radius: 6px;
     cursor: pointer;
+    
 }
 #start-screen h1 {
     text-align: center;
