@@ -70,6 +70,14 @@
                 </div>
             </div>
         </div>
+
+            <!-- Round Display -->
+            <div id="round-counter-container">
+                <button id="round-counter" type="button" class="round-btn">
+                    Round <span id="current-round">1</span>/<span id="total-rounds">10</span>
+                </button>
+            </div>
+
         
         
         <!-- Menu Navigation (outside map-placeholder) -->
@@ -149,15 +157,15 @@
     <!-- results page -->
     <section id="result-screen" class="hidden">
         <div class="result-box">
-          <h2>Round Results</h2>
-      
-          <p id="result-distance"></p>
-          <p id="result-score"></p>
-          <p id="result-feedback"></p>
-      
-          <button id="result-next">Next Round</button>
+            <h2>Round Results</h2>
+        
+            <p id="result-distance"></p>
+            <p id="result-score"></p>
+            <p id="result-feedback"></p>
+        
+            <button id="result-next">Next Round</button>
         </div>
-      </section>
+    </section>
     
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

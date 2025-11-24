@@ -5,6 +5,11 @@ import { map, marker as guessMarker } from "../map.js";
 import { nextRound } from "../game.js";
 
 let actualMarker: any = null;
+let currentRound = 1; // Added variable to keep count of rounds
+export let totalRounds = 10; // Added variable to keep count of total rounds
+
+const currentRoundElement = document.getElementById('current-round');
+const totalRoundsElement = document.getElementById('total-rounds');
 
 export function showResultScreen(
   guess: { lat: number; lng: number },
@@ -59,7 +64,7 @@ export function showResultScreen(
 
   feedbackEl.textContent = feedback;
 
- 
+
   resultScreen.classList.remove("hidden");
 
   const nextBtn = document.getElementById("result-next");
@@ -76,10 +81,32 @@ export function showResultScreen(
         actualMarker = null;
       }
 
-      console.log("Next round starting...");
-      
-      //advance to next round
-      nextRound();
+      console.log("Next round starting");
+      updateRoundDisplay(); // Update the round display counter
+      nextRound(); //advance to next round
     });
   }
+}
+
+// Update the HTML content to display current round numbers
+export function updateRoundDisplay(): void {
+    currentRound++; // Increment by one
+
+    if (currentRoundElement) {
+        currentRoundElement.textContent = currentRound.toString();
+    }
+    if (totalRoundsElement) {
+        totalRoundsElement.textContent = totalRounds.toString();
+    }
+}
+
+export function initializeRounds(total: number = totalRounds): void {
+    totalRounds = total;
+    currentRound = 1;
+    if (currentRoundElement) {
+      currentRoundElement.textContent = currentRound.toString();
+    }
+    if (totalRoundsElement) {
+      totalRoundsElement.textContent = totalRounds.toString();
+    }
 }

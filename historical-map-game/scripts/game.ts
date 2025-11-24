@@ -197,7 +197,6 @@ export function handleGuess(): void {
   const guessLon = marker.getLatLng().lng;
   console.log("Guess location:", guessLat, guessLon);
 
- 
   const correctLat = currentEvent.location.latitude;
   const correctLon = currentEvent.location.longitude;
   console.log("Correct location:", correctLat, correctLon);
