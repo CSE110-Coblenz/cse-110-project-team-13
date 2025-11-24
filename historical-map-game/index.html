@@ -13,15 +13,15 @@
 <body>
     <!-- Start Screen (Added in feature/start-page branch) + Added class="screen" in feature/play-again-button-->
     <div id="start-screen" class="screen">
-        <h1>WORLD HISTORY: EVENT PICTURE GUESSER</h1> 
-        <button id="start-button" type="button">START</button>
+        <h1 style="user-select: none">WORLD HISTORY: EVENT PICTURE GUESSER</h1> 
+        <button id="start-button" type="button" >START</button>
         <button id="how-to-play" type="button"> HOW TO PLAY</button>
     </div>
 
     <!-- HOW TO PLAY INSTRUCTIONS -->
     <dialog id="howto-dialog" aria-labelledby="howto-title">
         <header style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
-            <h2 id="howto-title" style="margin:0; color: black;">How to play</h2>
+            <h2 id="howto-title" style="margin:0; color: black; user-select: none;">How to play</h2>
             <form method="dialog">
             <button id="how-to-controls" aria-label="Close">✕</button>
         </form>
@@ -29,9 +29,9 @@
     
         <div id="how-to-content">
             <ol>
-                <li> You will be presented a historical image.</li>
-                <li> Click on the map to try to guess where the image occured.</li>
-                <li> The closer you are, the more points you get!</li>
+                <li style="user-select: none"> You will be presented a historical image.</li>
+                <li style="user-select: none"> Click on the map to try to guess where the image occured.</li>
+                <li style="user-select: none"> The closer you are, the more points you get!</li>
             </ol>
         </div>
     
@@ -53,7 +53,7 @@
                     <span></span>
                     <span></span>
                 </button>
-                <div id="time">02:00</div>
+                <div id="time"></div>
             </div>
             
             <!-- Historical Event Question-->

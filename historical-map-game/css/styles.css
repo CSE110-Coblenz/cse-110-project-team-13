@@ -19,13 +19,43 @@ body {
     display:flex;
     flex-direction: column; 
     background-image: url(../assets/images/map-blurred.png);
-    background-size: cover;
+    background-size: 110%; /* because the size of the image was small, scaled up for better look */
     background-color: #86bad0;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     background-position: center;
     background-attachment: fixed;
-    font-family: var(--font-main) !important;
-    color: var(--white) !important;
+    background-position: center; /* start at left */
+    animation: scroll-bg 20s linear infinite; /* adjust 30s for speed */
+}
+
+@keyframes scroll-bg {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: -2110px; /* adjust to image width for seamless repeat */
+    }
+}
+
+/* gliding light overlay */
+body::after {
+    content: "";
+    position: absolute;
+    top:0; left:0;
+    width:150%; /* wideness of light */
+    height:100%; 
+    pointer-events: none;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    z-index: 1;
+    animation: light-glide 5s linear infinite;
+}
+
+@keyframes light-glide {
+    0% { transform: translateX(-100%) skewX(-20deg); opacity: 0; }
+    10% { transform: translateX(-50%) skewX(-20deg); opacity: 1; }  /* starts the glide & fades in */
+    30% { transform: translateX(0) skewX(-20deg); opacity: 0; }    /* glides across & fades out */
+    100% { transform: translateX(0) skewX(-20deg); opacity: 0; }   /* stays invisible for the rest of the cycle */
 }
 
 h1, h2, p, button, div, span {
@@ -65,6 +95,7 @@ h1, h2, p, button, div, span {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    user-select: none;
 }
 
 #how-to-controls {
@@ -170,7 +201,7 @@ h1, h2, p, button, div, span {
     font-family: var(--font-main) !important;
 }
 
-#start-button:hover {
+#start-button:hover , #how-to-play:hover, #how-to-controls:hover {
     background: #c0392b;
     transform:scale(1.1); 
 }
