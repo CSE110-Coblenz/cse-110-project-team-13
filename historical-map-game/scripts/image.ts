@@ -3,6 +3,8 @@ export const imageCard = document.getElementById("image-card")!;
 export const hintButton = document.getElementById("hint-button")!;
 export const maximizeButton = document.getElementById("maximize-button")!;
 export const historicalImage = document.getElementById("historical-image") as HTMLImageElement;
+export const historicalImageContainer = document.getElementById("historical-image-container"); 
+
 export const hintText = document.getElementById("hint-text")!;
 
 export let isDragging = false;
@@ -167,5 +169,46 @@ maximizeButton.addEventListener("click", (e: MouseEvent) => {
   e.preventDefault();
   toggleMaximize(e);
 });
+
+// Disable double clicking for image
+export function disableDoubleClickOnImage() {4
+
+  // Added elements in this function to easily access elements without having to write a line delcaring them
+  const historicalImage = document.getElementById("historical-image") as HTMLImageElement;
+  const historicalImageContainer = document.getElementById("historical-image-container"); 
+
+    if (historicalImage) {
+        // Prevent right-click context menu
+        historicalImage.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Prevent double-click
+        historicalImage.addEventListener('dblclick', (e) => {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Prevent drag start (optional - makes it harder to drag to desktop)
+        historicalImage.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+            return false;
+        });
+    }
+    
+    // Also protect the container
+    if (imageContainer) {
+        imageContainer.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+        
+        imageContainer.addEventListener('dblclick', (e) => {
+            e.preventDefault();
+            return false;
+        });
+    }
+}
 
 console.log('Image.ts loaded successfully');

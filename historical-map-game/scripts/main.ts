@@ -2,8 +2,9 @@ import { initMap } from "./map.js";
 import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
 import './howto.js'
 import { startTimer, stopTimer, resetTimer, handleGuess, resetGame, nextRound } from "./game.js";
-import { initializeDragging, loadHistoricalImage } from "./image.js";
+import { disableDoubleClickOnImage, initializeDragging, loadHistoricalImage } from "./image.js";
 import { initializeMenu } from "./menu.js";
+import { initializeRounds, totalRounds } from "./ui/results.js";
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -18,8 +19,12 @@ window.addEventListener("DOMContentLoaded", () => {
     initializeMenu();
 
     initializeDragging();
+
+    initializeRounds(); // Number of rounds can be updated in results.ts by updating totalRounds
     
     showStartScreen();
+
+    disableDoubleClickOnImage(); // Added in feature/start-screen-mini-game-buttons to ensure users can't save image to discover name of the event as an extra hint
 
     
     // Start game button handler
