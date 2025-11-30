@@ -91,41 +91,33 @@
 
         <!-- Modal windows for mini games -->
         <div id="minigame1-modal" class="modal-overlay">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Matching Game!</h2>
-                    <button class="close-modal" data-modal="minigame1-modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div id="matching-game" class="mini-game-screen">
-                        <h2>Match the Event to the Picture!</h2>
-                        <div class="timer">Time: <span id="match-timer">60</span>s</div>
-                        <button id="check-answers" class="check-btn">Check Answers</button>
-                        <button id="play-again" class="play-again-btn">Play Again</button>
-                        
-                        <div class="matching-area">
-                            <div class="images-side">
-                                <div class="event-image" data-event-id="1">
-                                    <img src="./assets/images/events/pyramids.jpg" alt="Historical event">
-                                </div>
-                                <div class="event-image" data-event-id="2">
-                                    <img src="./assets/images/events/roman_republic.jpg" alt="Historical event">
-                                </div>
-                                <div class="event-image" data-event-id="3">
-                                    <img src="./assets/images/events/trojanwar.jpg" alt="Historical event">
-                                </div>
-                            </div>
-                            
-                            <div class="names-side">
-                                <div class="event-name" data-event-id="2">Battle of Hastings</div>
-                                <div class="event-name" data-event-id="1">Pyramids of Giza</div>
-                                <div class="event-name" data-event-id="3">Fall of Berlin Wall</div>
-                                </div>
-                            </div>
-                        <div class="score">Matches: <span id="match-score">0</span>/3</div>
-                    </div>
+        <div class="modal-content">
+            <div class="modal-header">
+            <h2>Matching Game!</h2>
+            <button class="close-modal" data-modal="minigame1-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <div id="matching-game" class="mini-game-screen">
+                <h2>Match the Event to the Picture!</h2>
+                
+                <div class="timer">Time: <span id="match-timer">60</span>s</div>
+                
+                 <div class="matching-container">
+          <!-- Images row -->
+          <div class="images-row" id="images-row"></div>
+          
+          <!-- Labels row (shuffled) -->
+          <div class="labels-row" id="labels-row"></div>
+        </div>
+        
+        <div class="game-controls">
+          <button id="check-answers" class="check-btn">Check Answers</button>
+          <button id="play-again" class="play-again-btn">Play Again</button>
+          <div class="score">Matches: <span id="match-score">0</span>/<span id="total-matches">0</span></div>
                 </div>
             </div>
+            </div>
+        </div>
         </div>
     
         <div id="minigame2-modal" class="modal-overlay">

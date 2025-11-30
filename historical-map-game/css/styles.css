@@ -1236,3 +1236,199 @@ box-shadow: 0 0 20px rgba(0,0,0,0.3);
 .round-btn:hover {
     transform: translateY(-2px); /* Added little animation when user hovers over button */
 }
+
+/* ========================MATCHING GAME ======================== */
+#minigame1-modal .modal-content {
+    max-width: 1200px; 
+    width: 95%; 
+}
+
+
+.matching-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 1.5rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.images-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+}
+
+.match-image {
+    flex-shrink: 0;
+    width: 200px; 
+    height: 145px; 
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid var(--dark-grey); 
+    background: var(--dark-grey);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.match-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.labels-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+}
+
+.match-label {
+    flex-shrink: 0;
+    padding: 0.9rem 1.2rem; 
+    background: var(--dark-grey);
+    border: 3px solid #555; 
+    border-radius: 12px;
+    color: var(--white);
+    font-weight: bold;
+    text-align: center;
+    min-width: 165px; 
+    max-width: 200px; 
+    cursor: grab;
+    transition: all 0.3s ease;
+    user-select: none;
+    font-size: 0.95rem; 
+}
+
+/* Dragging state */
+.match-label.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+/* Hover effect */
+.match-label:hover {
+    border-color: rgba(232, 215, 184, 0.5);
+    transform: translateY(-3px);
+}
+
+/* Selected state*/
+.match-label.selected {
+    background: #E8D7B8;
+    color: #333;
+    border-color: #D4C5A9;
+    border-width: 4px; 
+    box-shadow: 0 0 15px rgba(232, 215, 184, 0.6);
+}
+
+/* Correct match */
+.match-image.correct {
+    border-color: #4CAF50;
+    border-width: 4px; 
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.match-label.correct {
+    background: #4CAF50 !important;
+    color: var(--white) !important;
+    border-color: #45a049;
+    border-width: 4px; 
+    cursor: default;
+}
+
+/* Incorrect match */
+.match-image.incorrect {
+    border-color: #e53838;
+    border-width: 4px; 
+    animation: shake 0.5s ease;
+}
+
+.match-label.incorrect {
+    background: #e53838 !important;
+    color: var(--white) !important;
+    border-color: #c62828;
+    border-width: 4px; 
+}
+
+/* Shake animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Game controls */
+.game-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.game-controls .score {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--white);
+}
+
+/* Responsive design */
+@media (max-width: 1400px) {
+    .match-image {
+        width: 180px;
+        height: 130px;
+    }
+    
+    .match-label {
+        min-width: 150px;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .images-row,
+    .labels-row {
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .match-image {
+        width: 160px;
+        height: 115px;
+    }
+    
+    .match-label {
+        min-width: 140px;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.85rem;
+    }
+    
+    .images-row,
+    .labels-row {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #minigame1-modal .modal-content {
+        max-width: 95%;
+    }
+    
+    .match-image {
+        width: 140px;
+        height: 100px;
+    }
+    
+    .match-label {
+        min-width: 120px;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .images-row,
+    .labels-row {
+        gap: 0.8rem;
+    }
+}
