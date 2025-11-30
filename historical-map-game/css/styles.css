@@ -92,6 +92,12 @@ h1, h2, p, button, div, span {
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
+#submit-guess-game:hover {
+    background-color: var(--dark-green) !important; /* Use your CSS variable */
+    border: 3px solid #185b27 !important;
+    transform: translateX(-50%) scale(1.05); /* Slight scale effect */
+}
+
 /* ======================== HINT BUTTON ======================== */
 #hint-button {
     padding: 8px 16px;
