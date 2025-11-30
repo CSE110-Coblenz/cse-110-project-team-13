@@ -1,63 +1,104 @@
 export class MatchingGame {
-    private draggedItem: HTMLElement | null = null;
+    private events: any[] = [];
     private timerValue = 60;
     private timerInterval: number | null = null;
+    private selectedImage: HTMLElement | null = null;
+    private selectedName: HTMLElement | null = null;
 
-    constructor() {
-        this.initializeDragging();
-        this.startTimer();
-        this.initializePlayAgainButton();
-        this.initializeCheckButton();
-        console.log("Matching Game initialized");
+    constructor(eventsSourceUrl?: string) {
+        this.events = [];
+        this.timerValue = 60;
+        this.timerInterval = null;
+        this.selectedImage = null;
+        this.selectedName = null;
+        this.loadEvents(eventsSourceUrl)
+            .then(() => {
+            this.loadRandomEvents();
+            this.initializeSelection();
+            this.startTimer();
+            this.initializePlayAgainButton();
+            console.log("Matching Game initialized");
+        })
+            .catch(err => console.error("Matching Game failed:", err));
     }
 
-    // ---------------- Dragging ----------------
-    private initializeDragging() {
-        const names = document.querySelectorAll<HTMLElement>(".event-name");
+    // ---------------- Selection Handling ----------------
+    private initializeSelection() {
         const images = document.querySelectorAll<HTMLElement>(".event-image");
+        const names = document.querySelectorAll<HTMLElement>(".event-name");
+
+        images.forEach(img => {
+            img.addEventListener("click", () => {
+                if (img.classList.contains("matched")) return;
+
+                if (this.selectedImage) this.selectedImage.classList.remove("selected");
+                this.selectedImage = img;
+                img.classList.add("selected");
+                this.tryMatch();
+            });
+        });
 
         names.forEach(name => {
-            name.draggable = true;
+            name.addEventListener("click", () => {
+                if (name.classList.contains("matched")) return;
 
-            name.addEventListener("dragstart", () => {
-                this.draggedItem = name;
-                name.classList.add("dragging");
-            });
-
-            name.addEventListener("dragend", () => {
-                name.classList.remove("dragging");
-            });
-        
-            // Allow dropping ON TOP of another name
-            name.addEventListener("dragover", (e) => e.preventDefault());
-
-            name.addEventListener("drop", (e) => {
-                e.preventDefault();
-                if (!this.draggedItem) return;
-                if (this.draggedItem === name) return; // can't drop on itself
-
-                // Swap nodes
-                this.swapNames(this.draggedItem, name);
-                this.draggedItem = null;
+                if (this.selectedName) this.selectedName.classList.remove("selected");
+                this.selectedName = name;
+                name.classList.add("selected");
+                this.tryMatch();
             });
         });
     }
-    // DRAG AND DROP HANDLING
-    private swapNames(a: HTMLElement, b: HTMLElement) {
-        const parent = a.parentElement;
-        if (!parent) return;
 
-        const aNext = a.nextElementSibling === b ? a : a.nextElementSibling;
-
-        parent.insertBefore(a, b);
-        parent.insertBefore(b, aNext);
+    private tryMatch() {
+        if (!this.selectedImage || !this.selectedName)
+            return;
+        const imgId = this.selectedImage.dataset.eventId;
+        const nameId = this.selectedName.dataset.eventId;
+        if (imgId === nameId) {
+            // Correct match - turn green permanently
+            this.selectedImage.classList.add("matched");
+            this.selectedName.classList.add("matched");
+            this.selectedImage.classList.remove("drop-invalid", "selected");
+            this.selectedName.classList.remove("drop-invalid", "selected");
+            this.selectedImage = null;
+            this.selectedName = null;
+        }
+        else {
+            // Incorrect match - turn red temporarily
+            this.selectedImage.classList.add("drop-invalid");
+            this.selectedName.classList.add("drop-invalid");
+            this.selectedImage.classList.remove("selected");
+            this.selectedName.classList.remove("selected");
+            
+            // Store references before clearing
+            const wrongImg = this.selectedImage;
+            const wrongName = this.selectedName;
+            
+            this.selectedImage = null;
+            this.selectedName = null;
+            
+            // Remove red after 1 second so they can try again
+            setTimeout(() => {
+                wrongImg.classList.remove("drop-invalid");
+                wrongName.classList.remove("drop-invalid");
+            }, 1000);
+        }
+        this.updateScore();
     }
 
-    // TIMER
+    private updateScore() {
+        const matched = document.querySelectorAll<HTMLElement>(".event-image.matched").length;
+        const score = document.getElementById("match-score");
+        if (score) score.textContent = `${matched}`;
+    }
+
+    // ---------------- Timer ----------------
     private startTimer() {
         const timerEl = document.getElementById("match-timer");
         if (!timerEl) return;
 
+        this.timerValue = 60;
         this.timerInterval = window.setInterval(() => {
             this.timerValue--;
             timerEl.textContent = `${this.timerValue}`;
@@ -70,48 +111,27 @@ export class MatchingGame {
     }
 
     private stopTimer() {
-        if (this.timerInterval != null) {
-            clearInterval(this.timerInterval);
-            this.timerInterval = null;
-        }
-    }
-
-    // CHECK ANSWERS
-    private initializeCheckButton() {
-        const btn = document.getElementById("check-answers");
-        if (!btn) return;
-
-        btn.addEventListener("click", () => {
-            this.stopTimer();
-            this.revealResults();
-        });
+        if (this.timerInterval !== null) clearInterval(this.timerInterval);
+        this.timerInterval = null;
     }
 
     private revealResults() {
-        const images = document.querySelectorAll<HTMLElement>(".images-side .event-image");
-        const names = document.querySelectorAll<HTMLElement>(".names-side .event-name");
+        const images = document.querySelectorAll<HTMLElement>(".event-image");
+        const names = document.querySelectorAll<HTMLElement>(".event-name");
 
-        let correctCount = 0;
-
-        images.forEach((img, index) => {
-            const correctId = img.dataset.eventId;
-            const name = names[index];
-
-            img.classList.remove("correct", "incorrect");
-
-            if (name.dataset.eventId === correctId) {
-                img.classList.add("correct");
-                correctCount++;
-            } else {
-                img.classList.add("incorrect");
+        images.forEach(img => {
+            const id = img.dataset.eventId;
+            const name = Array.from(names).find(n => n.dataset.eventId === id);
+            if (name && !img.classList.contains("matched")) {
+                img.classList.add("drop-invalid");
+                name.classList.add("drop-invalid");
             }
         });
 
-        const score = document.getElementById("match-score");
-        if (score) score.textContent = `${correctCount}`;
+        this.updateScore();
     }
 
-    // RESET GAME
+    // ---------------- Reset Game ----------------
     private initializePlayAgainButton() {
         const btn = document.getElementById("play-again");
         if (!btn) return;
@@ -120,45 +140,81 @@ export class MatchingGame {
     }
 
     public reset() {
-        console.log("Resetting mini-game...");
+        this.stopTimer();
 
-        // 1. Remove correctness borders
-        document.querySelectorAll(".event-image").forEach(img => {
-            img.classList.remove("correct", "incorrect");
+        // Clear all classes
+        document.querySelectorAll<HTMLElement>(".event-image").forEach(img => {
+            img.className = "event-image";
+        });
+        document.querySelectorAll<HTMLElement>(".event-name").forEach(name => {
+            name.className = "event-name";
         });
 
-        // 2. Reset score
-        const score = document.getElementById("match-score");
-        if (score) score.textContent = "0";
+        this.selectedImage = null;
+        this.selectedName = null;
 
-        // 3. Shuffle name order
-        this.shuffleNames();
-
-        // 4. Re-enable dragging
-        document.querySelectorAll(".event-name").forEach(name => {
-            (name as HTMLElement).draggable = true;
-        });
-
-        // 5. Restart timer
+        this.loadRandomEvents();
+        this.initializeSelection(); // re-bind events after reload
+        this.updateScore();
         this.startTimer();
     }
 
-    private shuffleNames() {
-        const list = document.querySelector(".names-side");
-        if (!list) return;
+    // ---------------- Load Events ----------------
+    private async loadEvents(url?: string) {
+        const urls = url ? [url, '/events.json', './events.json', 'assets/events.json'] : ['/events.json','./events.json','assets/events.json'];
+        let lastErr: any = null;
 
-        const items = Array.from(list.children);
-
-        for (let i = items.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            list.appendChild(items[j]);
-            items.splice(j, 1);
+        for (const u of urls) {
+            try {
+                const res = await fetch(u);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const json = await res.json();
+                this.events = Array.isArray(json.events) ? json.events : Array.isArray(json) ? json : [];
+                return;
+            } catch (e) { lastErr = e; }
         }
+        throw lastErr;
     }
-      public destroy() {
-        this.stopTimer();
-        document.querySelectorAll(".event-image").forEach(img => {
-            img.classList.remove("correct", "incorrect");
+
+    // ---------------- Load Random Events ----------------
+    private loadRandomEvents() {
+        const matchingArea = document.querySelector<HTMLElement>("#minigame1-modal .matching-area");
+        if (!matchingArea) return;
+
+        matchingArea.innerHTML = "";
+
+        const selected = this.shuffle([...this.events]).slice(0, 10);
+        const shuffledNames = this.shuffle([...selected]);
+
+        // Create rows with image on left, name on right
+        selected.forEach((ev, index) => {
+            const row = document.createElement("div");
+            row.classList.add("match-row");
+
+            // Create image div
+            const imgDiv = document.createElement("div");
+            imgDiv.classList.add("event-image");
+            imgDiv.dataset.eventId = String(ev.id);
+            imgDiv.innerHTML = `<img src="${ev.image}" alt="${ev.title || ev.name}">`;
+
+            // Create name div with shuffled name
+            const nameEvent = shuffledNames[index];
+            const nameDiv = document.createElement("div");
+            nameDiv.classList.add("event-name");
+            nameDiv.dataset.eventId = String(nameEvent.id);
+            nameDiv.textContent = nameEvent.name || nameEvent.title;
+
+            row.appendChild(imgDiv);
+            row.appendChild(nameDiv);
+            matchingArea.appendChild(row);
         });
+    }
+
+    private shuffle<T>(arr: T[]): T[] {
+        return arr.sort(() => Math.random() - 0.5);
+    }
+
+    public destroy() {
+        this.stopTimer();
     }
 }
