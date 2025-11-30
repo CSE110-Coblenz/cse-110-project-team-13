@@ -227,6 +227,120 @@ h1, h2, p, button, div, span {
     width: 100vw;
 }
 
+
+
+/* ======================== MINIGAME2 CENTERED STYLING ======================== */
+#minigame2-modal .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+#minigame2-modal .timeline-game h2#timeline-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+#minigame2-modal .timeline-hint {
+    font-size: 1rem;
+    color: #f0f0f0;
+    background: var(--dark-grey);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    max-width: 90%;
+}
+
+#minigame2-modal .timeline-game img.event-image {
+    width: 300px;
+    max-width: 90%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+#minigame2-modal .timeline-game img.event-image:hover {
+    cursor: default;
+}
+
+#minigame2-modal .slider-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    gap: 0.5rem;
+}
+
+#minigame2-modal #timeline-slider {
+    width: 100%;
+    accent-color: var(--green);
+}
+
+#minigame2-modal .year-display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--white);
+    text-align: center;
+}
+
+#minigame2-modal .controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+#minigame2-modal .controls button {
+    background: var(--green);
+    color: var(--white);
+    border: 3px solid var(--dark-green);
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#minigame2-modal .controls button:hover {
+    transform: scale(1.05);
+    background: var(--dark-green);
+}
+
+#minigame2-modal .timer {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background: var(--dark-grey);
+}
+
+#minigame2-modal .result-area {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--white);
+    margin-top: 1rem;
+}
+
+#minigame2-modal #timeline-score {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--green);
+    margin-top: 0.5rem;
+}
+
+
+
+
 /* HISTORICAL IMAGE */
 #historical-image-container {
     position: absolute;

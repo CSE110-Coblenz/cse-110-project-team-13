@@ -1,8 +1,10 @@
 // menu.ts - Hamburger Menu Module
 // Provides navigation menu with Back to Start and Mini Game options
 import { MatchingGame } from "./matching-game.js";
+import { TimelineGame } from "./timeline-game.js";
 
 let mg1: MatchingGame | null = null;
+let mg2: TimelineGame | null = null;
 
 export function initializeMenu(): void {
     console.log('Initializing menu...');
@@ -89,13 +91,17 @@ export function initializeMenu(): void {
         console.log('Mini game 2 clicked');
         minigame2Modal.classList.add('active');
         
+
+         // Create timeline game instance and store it so we can destroy it later
+        if (mg2) {
+            mg2.destroy();
+            mg2 = null;
+        }
+        mg2 = new TimelineGame(); // loads events.json automatically
+
         // Close menu after action
         menuToggle.classList.remove('active');
         menuNav.classList.add('menu-hidden');
-
-        document.addEventListener("DOMContentLoaded", () => {
-            new MatchingGame();
-        });
     });
 
     // Close modal buttons
@@ -113,6 +119,10 @@ export function initializeMenu(): void {
             if (modalId === "minigame1-modal" && mg1) {
                 mg1.destroy();
                 mg1 = null;
+            }
+            if (modalId === "minigame2-modal" && mg2) {
+                mg2.destroy();
+                mg2 = null;
             }
         });
     });
