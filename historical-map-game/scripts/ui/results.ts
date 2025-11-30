@@ -105,9 +105,9 @@ export function updateRoundDisplay(): void {
     }
 }
 
-export function initializeRounds(total: number = totalRounds): void {
+export function initializeRounds(total: number = totalRounds, current: number = currentRound): void {
     totalRounds = total;
-    currentRound = 1;
+    currentRound = current;
     if (currentRoundElement) {
       currentRoundElement.textContent = currentRound.toString();
     }

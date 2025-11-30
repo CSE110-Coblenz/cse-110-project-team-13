@@ -5,7 +5,7 @@ import { showResultScreen } from "./ui/results.js";
 import { GAME_CONFIG } from "./utils.js";
 import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
 import { setHeapSnapshotNearHeapLimit } from "v8";
-import { totalRounds } from "./ui/results.js";
+import { totalRounds, initializeRounds } from "./ui/results.js";
 
 let timeDisplay: HTMLElement | null = null;
 let scoreDisplay: HTMLElement | null = null;
@@ -43,6 +43,9 @@ export async function resetGame(): Promise<void> {
   
   await loadEvents();
   console.log("Game state reset");
+
+  // Initialize round number, that way the current round correctly appears as one when user plays
+  initializeRounds(totalRounds, 1);
 }
 
 //first we want to load the events from the JSON file
