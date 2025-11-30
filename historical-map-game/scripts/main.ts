@@ -61,6 +61,13 @@ window.addEventListener("DOMContentLoaded", () => {
     startButton.addEventListener("click", () => {
         showGameScreen();
         initMap("map-placeholder"); // only map.ts knows how to do this
+
+        // Allow users to see and click Submit Guess Button again, included it here as whenever startbutton was clicked, for some reason it wouldn't appear without this code
+        const submitGuessButton = document.getElementById("submit-guess-game");
+        if (submitGuessButton) {
+            submitGuessButton.style.display = "block"; 
+        }
+
         startTimer(() => {
             // alert("Time's up!");
             resetTimer();

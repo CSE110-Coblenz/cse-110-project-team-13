@@ -19,6 +19,11 @@ export function showResultScreen(
 ): void {
   console.log("showResultScreen called with:", { guess, actual, distance, score });
 
+  // Disable Submit Guess Button. Ensures user can't spam guess button to get more points.
+  const submitGuessButton = document.getElementById("submit-guess-game");
+  if (submitGuessButton) {
+    submitGuessButton.style.display = "none"; 
+  }
   
   if (guessMarker) {
     guessMarker.setLatLng([guess.lat, guess.lng]);
@@ -100,9 +105,9 @@ export function updateRoundDisplay(): void {
     }
 }
 
-export function initializeRounds(total: number = totalRounds): void {
+export function initializeRounds(total: number = totalRounds, current: number = currentRound): void {
     totalRounds = total;
-    currentRound = 1;
+    currentRound = current;
     if (currentRoundElement) {
       currentRoundElement.textContent = currentRound.toString();
     }

@@ -5,6 +5,7 @@ import { showResultScreen } from "./ui/results.js";
 import { GAME_CONFIG } from "./utils.js";
 import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
 import { setHeapSnapshotNearHeapLimit } from "v8";
+import { totalRounds, initializeRounds } from "./ui/results.js";
 
 let timeDisplay: HTMLElement | null = null;
 let scoreDisplay: HTMLElement | null = null;
@@ -42,6 +43,9 @@ export async function resetGame(): Promise<void> {
   
   await loadEvents();
   console.log("Game state reset");
+
+  // Initialize round number, that way the current round correctly appears as one when user plays
+  initializeRounds(totalRounds, 1);
 }
 
 //first we want to load the events from the JSON file
@@ -59,8 +63,9 @@ async function loadEvents(): Promise<void> {
 
 //pick a random event that hasn't been used yet
 function pickRandomEvent(): boolean {
-  //Show 10 events, then we are done.
-  if (usedEventIndices.length >= 10) {
+  //Show total number of rounds, then we are done.
+  // To adjust the number of total rounds, go into scripts/ui/results.ts
+  if (usedEventIndices.length >= totalRounds) {
     return false;
   }
   
@@ -246,6 +251,13 @@ export function nextRound(): void {
     //showStartScreen(); not neccesary, the end game screen handles this.
   } else {
     console.log("Moving to next event:", currentEvent?.name);
+
+    // Allow users to see and click Submit Guess Button again
+    const submitGuessButton = document.getElementById("submit-guess-game");
+    if (submitGuessButton) {
+      submitGuessButton.style.display = "block"; 
+    }
+
     //updateEventImage(); Not neccesary because we are calling this in pickRandomEvent()
     
     //reset timer for next event
