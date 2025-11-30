@@ -5,6 +5,7 @@ import { showResultScreen } from "./ui/results.js";
 import { GAME_CONFIG } from "./utils.js";
 import { showStartScreen, showGameScreen, showEndGameScreen, startButton, submitGuessButton, playAgainButton } from "./ui/ui.js";
 import { setHeapSnapshotNearHeapLimit } from "v8";
+import { totalRounds } from "./ui/results.js";
 
 let timeDisplay: HTMLElement | null = null;
 let scoreDisplay: HTMLElement | null = null;
@@ -59,8 +60,9 @@ async function loadEvents(): Promise<void> {
 
 //pick a random event that hasn't been used yet
 function pickRandomEvent(): boolean {
-  //Show 10 events, then we are done.
-  if (usedEventIndices.length >= 10) {
+  //Show total number of rounds, then we are done.
+  // To adjust the number of total rounds, go into scripts/ui/results.ts
+  if (usedEventIndices.length >= totalRounds) {
     return false;
   }
   
@@ -252,7 +254,7 @@ export function nextRound(): void {
     if (submitGuessButton) {
       submitGuessButton.style.display = "block"; 
     }
-    
+
     //updateEventImage(); Not neccesary because we are calling this in pickRandomEvent()
     
     //reset timer for next event
