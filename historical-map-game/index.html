@@ -90,7 +90,7 @@
         </nav>
 
         <!-- Modal windows for mini games -->
-         <div id="minigame1-modal" class="modal-overlay">
+        <div id="minigame1-modal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Matching Game!</h2>
@@ -119,35 +119,36 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
-  
+        </div>
+
         <div id="minigame2-modal" class="modal-overlay">
             <div class="modal-content">
-              <div class="modal-header">
-                <h2>Timeline Game!</h2>
-                <button class="close-modal" data-modal="minigame2-modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <div class="timeline-game">
-                  <h2 id="timeline-name">Event name</h2>
-                  <div id="timeline-hint" class="timeline-hint small">Hint will appear here</div>
-                  <img id="timeline-image" src="" alt="Event image" class="event-image" style="user-select: none; -webkit-user-drag: none; -moz-user-select: none; -ms-user-select: none;" oncontextmenu="return false;"/>
-                  <div class="slider-row">
-                    <input id="timeline-slider" type="range"/>
-                    <div id="timeline-year-display" class="year-display"></div>
-                  </div>
-                  <div class="controls">
-                    <button id="timeline-submit">Submit Guess</button>
-                    <button id="timeline-play-again">Play Again</button>
-                    <div id="timeline-timer" class="timer">60</div>
-                  </div>
-                  <div id="timeline-result" class="result-area"></div>
-                  <div>Score: <span id="timeline-score">0</span></div>
+                <div class="modal-header">
+                    <h2>Timeline Game!</h2>
+                    <button class="close-modal" data-modal="minigame2-modal">&times;</button>
                 </div>
-              </div>
+                <div class="modal-body">
+                    <div class="timeline-game">
+                    <h2 id="timeline-name">Event name</h2>
+                    <div id="timeline-hint" class="timeline-hint small">Hint will appear here</div>
+                    <img id="timeline-image" src="" alt="Event image" class="event-image" style="user-select: none; -webkit-user-drag: none; -moz-user-select: none; -ms-user-select: none;" oncontextmenu="return false;"/>
+                    <div class="slider-row">
+                        <input id="timeline-slider" type="range"/>
+                        <div id="timeline-year-display" class="year-display"></div>
+                    </div>
+                    <div class="controls">
+                        <button id="timeline-submit">Submit Guess</button>
+                        <button id="timeline-play-again">Play Again</button>
+                        <div id="timeline-timer" class="timer">60</div>
+                    </div>
+                    <div id="timeline-result" class="result-area"></div>
+                    <div>Score: <span id="timeline-score">0</span></div>
+                    </div>
+                </div>
             </div>
-          </div>
-          
+        </div>
 
     <!-- End Game Screen + Final Score Results -->
     <div id="end-game-screen" class="screen">
