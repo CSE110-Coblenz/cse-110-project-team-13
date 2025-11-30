@@ -292,6 +292,11 @@ h1, h2, p, button, div, span {
     max-height: 100%;
     object-fit: contain;
     display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
 }
 
 /* Name box */

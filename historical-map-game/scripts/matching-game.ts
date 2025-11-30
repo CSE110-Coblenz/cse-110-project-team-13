@@ -4,6 +4,7 @@ export class MatchingGame {
     private timerInterval: number | null = null;
     private selectedImage: HTMLElement | null = null;
     private selectedName: HTMLElement | null = null;
+    private gameActive = true;
 
     constructor(eventsSourceUrl?: string) {
         this.events = [];
@@ -11,6 +12,7 @@ export class MatchingGame {
         this.timerInterval = null;
         this.selectedImage = null;
         this.selectedName = null;
+        this.gameActive = true;
         this.loadEvents(eventsSourceUrl)
             .then(() => {
             this.loadRandomEvents();
@@ -29,6 +31,7 @@ export class MatchingGame {
 
         images.forEach(img => {
             img.addEventListener("click", () => {
+                if (!this.gameActive) return; // Prevent clicking after timer ends
                 if (img.classList.contains("matched")) return;
 
                 if (this.selectedImage) this.selectedImage.classList.remove("selected");
@@ -36,10 +39,17 @@ export class MatchingGame {
                 img.classList.add("selected");
                 this.tryMatch();
             });
+
+            // Prevent users from right-clicking on images
+            img.addEventListener("contextmenu", (e) => {
+                e.preventDefault();
+                return false;
+            });
         });
 
         names.forEach(name => {
             name.addEventListener("click", () => {
+                if (!this.gameActive) return; // Prevent clicking after timer ends
                 if (name.classList.contains("matched")) return;
 
                 if (this.selectedName) this.selectedName.classList.remove("selected");
@@ -116,6 +126,7 @@ export class MatchingGame {
     }
 
     private revealResults() {
+        this.gameActive = false; // Disable matching
         const images = document.querySelectorAll<HTMLElement>(".event-image");
         const names = document.querySelectorAll<HTMLElement>(".event-name");
 
@@ -141,6 +152,7 @@ export class MatchingGame {
 
     public reset() {
         this.stopTimer();
+        this.gameActive = true; // Re-enable game on reset
 
         // Clear all classes
         document.querySelectorAll<HTMLElement>(".event-image").forEach(img => {
