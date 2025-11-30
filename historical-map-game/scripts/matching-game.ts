@@ -1,262 +1,240 @@
 export class MatchingGame {
-    private draggedItem: HTMLElement | null = null;
-    private timerValue = 60;
-    private timerInterval: number | null = null;
-    
-    // Properties
-    private totalPairs = 3;
-    private allEvents: any[] = [];
-    private currentEvents: any[] = [];
+  private events: any[] = [];
+  private timerValue = 60;
+  private timerInterval: number | null = null;
+  private selectedImage: HTMLElement | null = null;
+  private selectedName: HTMLElement | null = null;
+  private gameActive = true;
 
-    constructor() {
-        this.loadEvents().then(() => {
-            this.initializeGame();
-        }).catch(err => {
-            console.error("Failed to load events for matching game:", err);
-        });
-    }
+  constructor(eventsSourceUrl?: string) {
+    this.events = [];
+    this.timerValue = 60;
+    this.timerInterval = null;
+    this.selectedImage = null;
+    this.selectedName = null;
+    this.gameActive = true;
 
-    // Load events from JSON
-    private async loadEvents() {
-        const tryUrls = ['./events.json', '/events.json', 'assets/events.json'];
-        let lastErr: any = null;
-
-        for (const url of tryUrls) {
-            try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const json = await res.json();
-                
-                if (json.events && Array.isArray(json.events)) {
-                    this.allEvents = json.events;
-                } else if (Array.isArray(json)) {
-                    this.allEvents = json;
-                } else {
-                    throw new Error('Unexpected JSON shape');
-                }
-                console.log(`Loaded ${this.allEvents.length} events for matching game`);
-                return;
-            } catch (e) {
-                lastErr = e;
-            }
-        }
-        throw lastErr;
-    }
-
-    private initializeGame() {
-        this.selectRandomEvents();
-        this.generateImages();
-        this.generateLabels();
-        this.initializeDragging(); 
-        this.startTimer(); 
-        this.initializePlayAgainButton(); 
-        this.initializeCheckButton(); 
-        console.log("Matching Game initialized"); 
-    }
-
-    // Select random events
-    private selectRandomEvents() {
-        const shuffled = [...this.allEvents].sort(() => Math.random() - 0.5);
-        this.currentEvents = shuffled.slice(0, this.totalPairs);
-        console.log("Selected events:", this.currentEvents.map(e => e.name));
-    }
-
-    // Generate images in order
-    private generateImages() {
-        const imagesRow = document.getElementById("images-row");
-        if (!imagesRow) return;
-
-        imagesRow.innerHTML = '';
-        
-        this.currentEvents.forEach((event, index) => {
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'match-image';
-            imageDiv.dataset.eventId = String(event.id);
-            imageDiv.dataset.position = String(index);
-            imageDiv.innerHTML = `<img src="${event.image}" alt="${event.name}" />`;
-            imagesRow.appendChild(imageDiv);
-        });
-    }
-
-    // Generate labels SHUFFLED
-    private generateLabels() {
-        const labelsRow = document.getElementById("labels-row");
-        if (!labelsRow) return;
-
-        labelsRow.innerHTML = '';
-        
-        // Shuffle the labels
-        const shuffledEvents = [...this.currentEvents].sort(() => Math.random() - 0.5);
-        
-        shuffledEvents.forEach(event => {
-            const labelDiv = document.createElement('div');
-            labelDiv.className = 'match-label';
-            labelDiv.dataset.eventId = String(event.id);
-            labelDiv.textContent = event.name;
-            labelsRow.appendChild(labelDiv);
-        });
-
-        // Update total matches
-        const totalMatchesEl = document.getElementById("total-matches");
-        if (totalMatchesEl) {
-            totalMatchesEl.textContent = `${this.totalPairs}`;
-        }
-    }
-
-    private initializeDragging() {
-        const labels = document.querySelectorAll<HTMLElement>(".match-label");
-
-        labels.forEach(label => {
-            label.draggable = true;
-
-            label.addEventListener("dragstart", () => {
-                this.draggedItem = label;
-                label.classList.add("dragging");
-            });
-
-            label.addEventListener("dragend", () => {
-                label.classList.remove("dragging");
-            });
-        
-            // Allow dropping ON TOP of another label
-            label.addEventListener("dragover", (e) => e.preventDefault());
-
-            label.addEventListener("drop", (e) => {
-                e.preventDefault();
-                if (!this.draggedItem) return;
-                if (this.draggedItem === label) return; // can't drop on itself
-
-                // Swap nodes 
-                this.swapNames(this.draggedItem, label);
-                this.draggedItem = null;
-            });
-        });
-    }
-
-    // DRAG AND DROP HANDLING
-    private swapNames(a: HTMLElement, b: HTMLElement) {
-        const parent = a.parentElement;
-        if (!parent) return;
-
-        const aNext = a.nextElementSibling === b ? a : a.nextElementSibling;
-
-        parent.insertBefore(a, b);
-        parent.insertBefore(b, aNext);
-    }
-
-    // TIMER 
-    private startTimer() {
-        const timerEl = document.getElementById("match-timer");
-        if (!timerEl) return;
-
-        this.timerValue = 60;
-        timerEl.textContent = `${this.timerValue}`;
-
-        this.timerInterval = window.setInterval(() => {
-            this.timerValue--;
-            timerEl.textContent = `${this.timerValue}`;
-
-            if (this.timerValue <= 0) {
-                this.stopTimer();
-                this.revealResults();
-            }
-        }, 1000);
-    }
-
-    private stopTimer() {
-        if (this.timerInterval != null) {
-            clearInterval(this.timerInterval);
-            this.timerInterval = null;
-        }
-    }
-
-    // CHECK ANSWERS
-    private initializeCheckButton() {
-        const btn = document.getElementById("check-answers");
-        if (!btn) return;
-
-        btn.addEventListener("click", () => {
-            this.stopTimer();
-            this.revealResults();
-        });
-    }
-
-    // REVEAL RESULTS (Position-based matching)
-    private revealResults() {
-        const images = document.querySelectorAll<HTMLElement>(".match-image");
-        const labels = document.querySelectorAll<HTMLElement>(".match-label");
-
-        let correctCount = 0;
-
-        images.forEach((img, index) => {
-            const correctId = img.dataset.eventId;
-            const label = labels[index];
-
-            // Clear previous states
-            img.classList.remove("correct", "incorrect");
-            label.classList.remove("correct", "incorrect", "selected");
-
-            if (label.dataset.eventId === correctId) {
-                img.classList.add("correct");
-                label.classList.add("correct");
-                correctCount++;
-            } else {
-                img.classList.add("incorrect");
-                label.classList.add("incorrect");
-            }
-        });
-
-        const score = document.getElementById("match-score");
-        if (score) score.textContent = `${correctCount}`;
-    }
-
-    // RESET GAME 
-    private initializePlayAgainButton() {
-        const btn = document.getElementById("play-again");
-        if (!btn) return;
-
-        btn.addEventListener("click", () => this.reset());
-    }
-
-    public reset() {
-        console.log("Resetting mini-game..."); 
-
-        // 1. Remove correctness borders
-        document.querySelectorAll(".match-image, .match-label").forEach(el => {
-            el.classList.remove("correct", "incorrect", "selected", "dragging");
-        });
-
-        // 2. Reset score 
-        const score = document.getElementById("match-score");
-        if (score) score.textContent = "0";
-
-        // 3. Shuffle name order 
-        this.shuffleNames();
-
-        // 4. Re-enable dragging 
-        document.querySelectorAll(".match-label").forEach(label => {
-            (label as HTMLElement).draggable = true;
-        });
-
-        // 5. Restart timer 
-        this.stopTimer();
+    this.loadEvents(eventsSourceUrl)
+      .then(() => {
+        this.loadRandomEvents();
+        this.initializeSelection();
         this.startTimer();
+        this.initializePlayAgainButton();
+        console.log("Matching Game initialized");
+      })
+      .catch(err => console.error("Matching Game failed:", err));
+  }
+
+  // ---------------- Selection Handling ----------------
+  private initializeSelection() {
+    const images = document.querySelectorAll(".event-image");
+    const names = document.querySelectorAll(".event-name");
+
+    images.forEach(img => {
+      img.addEventListener("click", () => {
+        if (!this.gameActive) return; // Prevent clicking after timer ends
+        if (img.classList.contains("matched")) return;
+        if (this.selectedImage) this.selectedImage.classList.remove("selected");
+        this.selectedImage = img as HTMLElement;
+        img.classList.add("selected");
+        this.tryMatch();
+      });
+
+      // Prevent users from right-clicking on images
+      img.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        return false;
+      });
+    });
+
+    names.forEach(name => {
+      name.addEventListener("click", () => {
+        if (!this.gameActive) return; // Prevent clicking after timer ends
+        if (name.classList.contains("matched")) return;
+        if (this.selectedName) this.selectedName.classList.remove("selected");
+        this.selectedName = name as HTMLElement;
+        name.classList.add("selected");
+        this.tryMatch();
+      });
+    });
+  }
+
+  private tryMatch() {
+    if (!this.selectedImage || !this.selectedName) return;
+
+    const imgId = this.selectedImage.dataset.eventId;
+    const nameId = this.selectedName.dataset.eventId;
+
+    if (imgId === nameId) {
+      // Correct match - turn green permanently
+      this.selectedImage.classList.add("matched");
+      this.selectedName.classList.add("matched");
+      this.selectedImage.classList.remove("drop-invalid", "selected");
+      this.selectedName.classList.remove("drop-invalid", "selected");
+      this.selectedImage = null;
+      this.selectedName = null;
+    } else {
+      // Incorrect match - turn red temporarily
+      this.selectedImage.classList.add("drop-invalid");
+      this.selectedName.classList.add("drop-invalid");
+      this.selectedImage.classList.remove("selected");
+      this.selectedName.classList.remove("selected");
+
+      // Store references before clearing
+      const wrongImg = this.selectedImage;
+      const wrongName = this.selectedName;
+      this.selectedImage = null;
+      this.selectedName = null;
+
+      // Remove red after 1 second so they can try again
+      setTimeout(() => {
+        wrongImg.classList.remove("drop-invalid");
+        wrongName.classList.remove("drop-invalid");
+      }, 1000);
     }
 
-    // SHUFFLE 
-    private shuffleNames() {
-        this.selectRandomEvents();
-        this.generateImages();
-        this.generateLabels();
-        // Re-initialize dragging after generating new labels
-        this.initializeDragging();
-    }
+    this.updateScore();
+  }
 
-    // DESTROY 
-    public destroy() {
+  private updateScore() {
+    const matched = document.querySelectorAll(".event-image.matched").length;
+    const score = document.getElementById("match-score");
+    if (score) score.textContent = `${matched}`;
+  }
+
+  // ---------------- Timer ----------------
+  private startTimer() {
+    const timerEl = document.getElementById("match-timer");
+    if (!timerEl) return;
+
+    this.timerValue = 60;
+    timerEl.textContent = `${this.timerValue}`;
+
+    this.timerInterval = window.setInterval(() => {
+      this.timerValue--;
+      timerEl.textContent = `${this.timerValue}`;
+      if (this.timerValue <= 0) {
         this.stopTimer();
-        document.querySelectorAll(".match-image, .match-label").forEach(el => {
-            el.classList.remove("correct", "incorrect", "selected", "dragging");
-        });
+        this.revealResults();
+      }
+    }, 1000);
+  }
+
+  private stopTimer() {
+    if (this.timerInterval !== null) clearInterval(this.timerInterval);
+    this.timerInterval = null;
+  }
+
+  private revealResults() {
+    this.gameActive = false; // Disable matching
+    const images = document.querySelectorAll(".event-image");
+    const names = document.querySelectorAll(".event-name");
+
+    images.forEach(img => {
+      const id = (img as HTMLElement).dataset.eventId;
+      const name = Array.from(names).find(n => (n as HTMLElement).dataset.eventId === id);
+      if (name && !img.classList.contains("matched")) {
+        img.classList.add("drop-invalid");
+        name.classList.add("drop-invalid");
+      }
+    });
+
+    this.updateScore();
+  }
+
+  // ---------------- Reset Game ----------------
+  private initializePlayAgainButton() {
+    const btn = document.getElementById("play-again");
+    if (!btn) return;
+    btn.addEventListener("click", () => this.reset());
+  }
+
+  public reset() {
+    this.stopTimer();
+    this.gameActive = true; // Re-enable game on reset
+
+    // Clear all classes
+    document.querySelectorAll(".event-image").forEach(img => {
+      img.className = "event-image";
+    });
+    document.querySelectorAll(".event-name").forEach(name => {
+      name.className = "event-name";
+    });
+
+    this.selectedImage = null;
+    this.selectedName = null;
+    this.loadRandomEvents();
+    this.initializeSelection(); // re-bind events after reload
+    this.updateScore();
+    this.startTimer();
+  }
+
+  // ---------------- Load Events ----------------
+  private async loadEvents(url?: string) {
+    const urls = url 
+      ? [url, '/events.json', './events.json', 'assets/events.json'] 
+      : ['/events.json', './events.json', 'assets/events.json'];
+
+    let lastErr: any = null;
+
+    for (const u of urls) {
+      try {
+        const res = await fetch(u);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        this.events = Array.isArray(json.events) 
+          ? json.events 
+          : Array.isArray(json) 
+            ? json 
+            : [];
+        console.log(`Loaded ${this.events.length} events for matching game`);
+        return;
+      } catch (e) { 
+        lastErr = e; 
+      }
     }
+
+    throw lastErr;
+  }
+
+  // ---------------- Load Random Events ----------------
+  private loadRandomEvents() {
+    const matchingArea = document.querySelector("#minigame1-modal .matching-area");
+    if (!matchingArea) return;
+
+    matchingArea.innerHTML = "";
+    const selected = this.shuffle([...this.events]).slice(0, 10);
+    const shuffledNames = this.shuffle([...selected]);
+
+    // Create rows with image on left, name on right
+    selected.forEach((ev, index) => {
+      const row = document.createElement("div");
+      row.classList.add("match-row");
+
+      // Create image div
+      const imgDiv = document.createElement("div");
+      imgDiv.classList.add("event-image");
+      imgDiv.dataset.eventId = String(ev.id);
+      imgDiv.innerHTML = `<img src="${ev.image}" alt="${ev.name || ev.title}" />`;
+
+      // Create name div with shuffled name
+      const nameEvent = shuffledNames[index];
+      const nameDiv = document.createElement("div");
+      nameDiv.classList.add("event-name");
+      nameDiv.dataset.eventId = String(nameEvent.id);
+      nameDiv.textContent = nameEvent.name || nameEvent.title;
+
+      row.appendChild(imgDiv);
+      row.appendChild(nameDiv);
+      matchingArea.appendChild(row);
+    });
+  }
+
+  private shuffle<T>(arr: T[]): T[] {
+    return arr.sort(() => Math.random() - 0.5);
+  }
+
+  public destroy() {
+    this.stopTimer();
+  }
 }
