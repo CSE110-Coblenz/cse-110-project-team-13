@@ -5,6 +5,7 @@ import { startTimer, stopTimer, resetTimer, handleGuess, resetGame, nextRound } 
 import { disableDoubleClickOnImage, initializeDragging, loadHistoricalImage } from "./image.js";
 import { initializeMenu } from "./menu.js";
 import { initializeRounds, totalRounds } from "./ui/results.js";
+import { TimelineGame } from './timeline-game.js';
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -17,6 +18,35 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     initializeMenu();
+
+    // Initialize Timeline Game (Mini Game 2)
+    let timelineGameInstance: TimelineGame | null = null;
+
+    const minigame2Button = document.getElementById('menu-minigame2');
+    const minigame2Modal = document.getElementById('minigame2-modal');
+    const minigame2CloseBtn = minigame2Modal?.querySelector('.close-modal');
+
+    // Open modal and initialize game
+    minigame2Button?.addEventListener('click', () => {
+        if (minigame2Modal) {
+            minigame2Modal.classList.remove('modal-hidden');
+            minigame2Modal.style.display = 'flex';
+            // Initialize the timeline game when modal opens
+            timelineGameInstance = new TimelineGame();
+        }
+    });
+
+    // Close modal and destroy game
+    minigame2CloseBtn?.addEventListener('click', () => {
+        if (minigame2Modal) {
+            minigame2Modal.style.display = 'none';
+            minigame2Modal.classList.add('modal-hidden');
+            // Clean up the game instance
+            timelineGameInstance?.destroy();
+            timelineGameInstance = null;
+        }
+    });
+
 
     initializeDragging();
 
