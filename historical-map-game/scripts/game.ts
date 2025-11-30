@@ -246,6 +246,13 @@ export function nextRound(): void {
     //showStartScreen(); not neccesary, the end game screen handles this.
   } else {
     console.log("Moving to next event:", currentEvent?.name);
+
+    // Allow users to see and click Submit Guess Button again
+    const submitGuessButton = document.getElementById("submit-guess-game");
+    if (submitGuessButton) {
+      submitGuessButton.style.display = "block"; 
+    }
+    
     //updateEventImage(); Not neccesary because we are calling this in pickRandomEvent()
     
     //reset timer for next event
