@@ -2,7 +2,7 @@
 // Provides navigation menu with Back to Start and Mini Game options
 import { MatchingGame } from "./matching-game.js";
 import { TimelineGame } from "./timeline-game.js";
-import { stopTimer, startTimer } from "./game.js";
+import { stopTimer, resumeTimer } from "./game.js";
 
 let mg1: MatchingGame | null = null;
 let mg2: TimelineGame | null = null;
@@ -89,6 +89,16 @@ export function initializeMenu(): void {
         //pause if the popup is open
         if (!modal.classList.contains("active")) {
             stopTimer();
+        }
+    };
+
+    
+    const resumeMainGameAfterMinigame = (modal: HTMLDivElement | null): void => {
+        if (!modal) return;
+        //only resume timer after user closes modal
+        if (modal.classList.contains("active")) {
+            //continue the timer from where it left off
+            resumeTimer();
         }
     };
 
@@ -232,9 +242,11 @@ export function initializeMenu(): void {
     document.addEventListener("keydown", (event: KeyboardEvent): void => {
         if (event.key === "Escape") {
             if (minigame1Modal && minigame1Modal.classList.contains("active")) {
+                resumeMainGameAfterMinigame(minigame1Modal);
                 minigame1Modal.classList.remove("active");
             }
             if (minigame2Modal && minigame2Modal.classList.contains("active")) {
+                resumeMainGameAfterMinigame(minigame2Modal);
                 minigame2Modal.classList.remove("active");
             }
         }

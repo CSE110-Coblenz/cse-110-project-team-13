@@ -132,6 +132,30 @@ export async function startTimer(onTimeUp?: () => void) {
   }, 1000);
 }
 
+//resume timer at correct time
+export function resumeTimer(): void {
+  if (timerInterval) {
+    return;
+  }
+  updateTimer();
+  gameStartTime = Date.now();
+
+  timerInterval = window.setInterval(() => {
+    timeLeft--;
+    updateTimer();
+
+    if (timeLeft <= 0) {
+      stopTimer();
+      if (!marker) {
+        resetGame();
+        showStartScreen();
+      } else {
+        handleGuess();
+      }
+    }
+  }, 1000);
+}
+
 // Stop the countdown
 export function stopTimer() {
   if (timerInterval) {
