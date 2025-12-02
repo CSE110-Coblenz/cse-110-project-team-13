@@ -609,15 +609,27 @@ h1, h2, p, button, div, span {
 
 
 /* ======================== MENU NAV ======================== */
+#menu-nav ul {
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+#menu-nav li {
+    list-style: none; 
+}
+
 #menu-nav {
     position: fixed;
-    top: 70px;
-    left: 80px;
+    top: 10px;
+    left: 65px;
     background: var(--dark-grey) !important;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     z-index: 1001;
     transition: all 0.3s;
+    padding: 0;
+    margin: 0;
 }
 
 #menu-nav.menu-hidden {
@@ -637,10 +649,19 @@ h1, h2, p, button, div, span {
     transition: background 0.2s;
     color: var(--white) !important;
     font-weight: 500;
+    display: block;
 }
 
 .menu-option:hover {
     background: rgba(0,123,255,0.1);
+}
+
+.menu-option:first-child {
+    border-radius: 10px 10px 0 0; /* Round top corners */
+}
+
+.menu-option:last-child {
+    border-radius: 0 0 10px 10px; /* Round bottom corners */
 }
 
 

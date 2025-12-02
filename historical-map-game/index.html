@@ -30,25 +30,49 @@
 
     <!-- HOW TO PLAY INSTRUCTIONS -->
     <dialog id="howto-dialog" aria-labelledby="howto-title">
-        <header style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
-            <h2 id="howto-title" style="margin:0; color: black; user-select: none;">How to play</h2>
-            <form method="dialog">
+    <header style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
+        <h2 id="howto-title" style="margin:0; color: black; user-select: none;">How to Play</h2>
+        <form method="dialog">
             <button id="how-to-controls" aria-label="Close">✕</button>
         </form>
-        </header>
+    </header>
     
-        <div id="how-to-content">
-            <ol>
-                <li style="user-select: none"> You will be presented a historical image.</li>
-                <li style="user-select: none"> Click on the map to try to guess where the image occured.</li>
-                <li style="user-select: none"> The closer you are, the more points you get!</li>
-            </ol>
-        </div>
+    <div id="how-to-content">
+        <h3 style="color: #27ae60; margin-top: 1rem;">Main Game: Historical Event Guesser</h3>
+        <ol>
+            <li style="user-select: none;">You will see a historical image on the bottom right of the screen.</li>
+            <li style="user-select: none;">Click the 💡 Hint button to flip the card and reveal a clue about the event.</li>
+            <li style="user-select: none;">Click anywhere on the map to place your guess marker.</li>
+            <li style="user-select: none;">Click "Submit Guess" to check your answer.</li>
+            <li style="user-select: none;">The closer you are to the actual location, the more points you earn!</li>
+            <li style="user-select: none;">Complete 10 rounds to finish the game.</li>
+        </ol>
+
+        <h3 style="color: #27ae60; margin-top: 1.5rem;">Mini Game 1: Matching Game</h3>
+        <ol>
+            <li style="user-select: none;">Match 10 historical event names with their corresponding images.</li>
+            <li style="user-select: none;">Click the matching picture after selecting the event label to submit your match.</li>
+            <li style="user-select: none;">Correct matches turn green, incorrect matches turn red.</li>
+            <li style="user-select: none;">Remember you have 60 seconds to match all events!</li>
+            <li style="user-select: none;">Your final score shows how many you matched correctly! </li>
+        </ol>
+
+        <h3 style="color: #27ae60; margin-top: 1.5rem;">Mini Game 2: Timeline Game</h3>
+        <ol>
+            <li style="user-select: none;">You'll see an image of a historical event.</li>
+            <li style="user-select: none;"> Use the slider to select the year you think the event occurred. You can use your left and right arrows to select the exact year, you wish to submit.</li>
+            <li style="user-select: none;">Click "Submit Guess" to check your answer.</li>
+            <li style="user-select: none;">Remember you have 60 seconds to submit your guess!</li>
+            <li style="user-select: none;">Points are awarded based on how close you are to the correct year.</li>
+
+        </ol>
+    </div>
     
-        <form method="dialog" style="margin-top:1rem">
-            <button id="how-to-controls" >Got it</button>
-        </form>
-    </dialog>      
+    <form method="dialog" style="margin-top:1rem">
+        <button id="how-to-controls">Got it!</button>
+    </form>
+</dialog>
+ 
 
     
     <!-- Game Screen (Added in feature/interactive-map branch) -->
@@ -154,7 +178,7 @@
                     <button id="timeline-play-again">Play Again</button>
                     <div id="timeline-timer" class="timer">60</div>
                 </div>
-                
+
                 <div id="timeline-result" class="result-area"></div>
                 <div>Score: <span id="timeline-score">0</span></div>
                 </div>
