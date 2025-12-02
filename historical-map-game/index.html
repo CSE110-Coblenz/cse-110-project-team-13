@@ -10,14 +10,16 @@
     <!-- favicon-->
     <link rel="icon" type="image/png" href="assets/images/globe-logo.png"/>
 </head>
+
 <body>
     <!-- Start Screen (Added in feature/start-page branch) + Added class="screen" in feature/play-again-button-->
     <div id="start-screen" class="screen">
         <h1 style="user-select: none">WORLD HISTORY: EVENT PICTURE GUESSER</h1> 
         <button id="start-button" type="button" >START</button>
         <button id="how-to-play" type="button"> HOW TO PLAY</button>
+   
+        <hr/>  
 
-    <hr />  
         <h2 id="top-minigame-header"> MINI GAMES </h2>
         <div id="minigames">     
             <button id="top-minigame1" type="button"> MATCHING GAME </button>
@@ -61,7 +63,7 @@
                     <span></span>
                     <span></span>
                 </button>
-                <div id="time"></div>
+            <div id="time"></div>
             </div>
             
             <!-- Historical Event Question-->
@@ -72,21 +74,21 @@
                     <div class="image-front">
                         <img id="historical-image" src="" alt="Historical event">
                     </div>
+
                     <div class="image-back">
                         <p id="hint-text"> </p>
                     </div>
+
                 </div>
             </div>
         </div>
 
-            <!-- Round Display -->
-            <div id="round-counter-container">
-                <button id="round-counter" type="button" class="round-btn">
-                    Round <span id="current-round">1</span>/<span id="total-rounds">10</span>
-                </button>
-            </div>
-
-        
+        <!-- Round Display -->
+        <div id="round-counter-container">
+            <button id="round-counter" type="button" class="round-btn">
+                Round <span id="current-round">1</span>/<span id="total-rounds">10</span>
+            </button>
+        </div>
         
         <!-- Menu Navigation (outside map-placeholder) -->
         <nav id="menu-nav" class="menu-hidden">
@@ -105,18 +107,24 @@
                 <h2>Matching Game!</h2>
                 <button class="close-modal" data-modal="minigame1-modal">&times;</button>
             </div>
+
             <div class="modal-body">
                 <div id="matching-game" class="mini-game-screen">
                     <h2>Match the Event to the Picture!</h2>
                     <div class="timer">Time: <span id="match-timer">60</span>s</div>
+                    
                     <div class="matching-area">
                         <div class="images-side" id="images-container"></div>
                         <div class="names-side" id="names-container"></div>
                     </div>
-                    <div class="score">
-                        Matches: <span id="match-score">0</span>/10
+
+                    <div class="game-controls">
+                        <div class="score">
+                            Matches: <span id="match-score">0</span>/10
+                        </div>
+                        <button id="play-again" class="play-again-btn">Play Again</button>
                     </div>
-                    <button id="play-again" class="play-again-btn">Play Again</button>
+
                     </div>
                 </div>
             </div>
@@ -129,20 +137,24 @@
                 <h2>Timeline Game!</h2>
                 <button class="close-modal" data-modal="minigame2-modal">&times;</button>
             </div>
+
             <div class="modal-body">
                 <div class="timeline-game">
                 <h2 id="timeline-name">Event name</h2>
                 <div id="timeline-hint" class="timeline-hint small">Hint will appear here</div>
                 <img id="timeline-image" src="" alt="Event image" class="event-image" style="user-select: none; -webkit-user-drag: none; -moz-user-select: none; -ms-user-select: none;" oncontextmenu="return false;"/>
+                
                 <div class="slider-row">
                     <input id="timeline-slider" type="range" min="-3000" max="2025" step="1" value="0"/>
                     <div id="timeline-year-display" class="year-display"></div>
                 </div>
+
                 <div class="controls">
                     <button id="timeline-submit">Submit Guess</button>
                     <button id="timeline-play-again">Play Again</button>
                     <div id="timeline-timer" class="timer">60</div>
                 </div>
+                
                 <div id="timeline-result" class="result-area"></div>
                 <div>Score: <span id="timeline-score">0</span></div>
                 </div>
