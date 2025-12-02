@@ -120,10 +120,18 @@ export class TimelineGame {
     }
 
     // ------------------ Submit & scoring ------------------
-    private initializeSubmitButton() {
+   
+   /* private initializeSubmitButton() {
         const btn = document.getElementById("timeline-submit");
         if (!btn) return;
         btn.addEventListener("click", () => this.checkGuess());
+    } */ 
+
+    private initializeSubmitButton() {
+        const btn = document.getElementById("timeline-submit") as HTMLButtonElement | null;
+        if (!btn) return;
+       
+        btn.onclick = () => this.checkGuess();
     }
 
     private checkGuess() {
@@ -268,12 +276,19 @@ export class TimelineGame {
     }
 
     // ------------------ Reset / Play again ------------------
-    private initializePlayAgainButton() {
+    /*private initializePlayAgainButton() {
         const btn = document.getElementById("timeline-play-again");
         if (!btn) return;
         btn.addEventListener("click", () => {
             this.reset();
         });
+    } */ 
+
+    private initializePlayAgainButton() {
+        const btn = document.getElementById("timeline-play-again") as HTMLButtonElement | null;
+        if (!btn) return;
+       
+        btn.onclick = () => this.reset();
     }
 
     public reset() {

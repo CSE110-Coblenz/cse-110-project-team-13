@@ -801,7 +801,7 @@ h1, h2, p, button, div, span {
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
 }
 
@@ -1455,4 +1455,55 @@ box-shadow: 0 0 20px rgba(0,0,0,0.3);
     .labels-row {
         gap: 0.8rem;
     }
+}
+ /* Start page minigame buttons */
+
+ hr {
+    border: none; 
+    border-top: 2px solid #767575;
+    width: 100%;
+    margin-top: 2rem;
+    
+   
+}
+ #top-minigame-header {
+   
+    font-family: var(--font-main) !important;
+    color: var(--white);
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background: var(--dark-grey);
+    color: var(--white);
+    border-radius: 10px;
+    margin-top: 0; 
+
+ }
+ 
+#minigames {
+   
+    display: flex;
+    flex-direction: row;
+    gap:1rem;
+    
+}
+
+ #top-minigame1, #top-minigame2 {
+    padding: 1rem 4rem;
+    font-size: 0.8rem;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#top-minigame1:hover {
+    background: #c0392b;
+    transform:scale(1.1); 
+}
+
+#top-minigame2:hover {
+    background: #c0392b;
+    transform:scale(1.1);
 }
