@@ -132,6 +132,30 @@ export async function startTimer(onTimeUp?: () => void) {
   }, 1000);
 }
 
+//resume timer at correct time
+export function resumeTimer(): void {
+  if (timerInterval) {
+    return;
+  }
+  updateTimer();
+  gameStartTime = Date.now();
+
+  timerInterval = window.setInterval(() => {
+    timeLeft--;
+    updateTimer();
+
+    if (timeLeft <= 0) {
+      stopTimer();
+      if (!marker) {
+        resetGame();
+        showStartScreen();
+      } else {
+        handleGuess();
+      }
+    }
+  }, 1000);
+}
+
 // Stop the countdown
 export function stopTimer() {
   if (timerInterval) {
@@ -210,10 +234,10 @@ export function handleGuess(): void {
   const distanceKm = calculateDistance(guessLat, guessLon, correctLat, correctLon);
   console.log("Distance:", distanceKm, "km");
 
-  
-  const timeTaken = (Date.now() - gameStartTime) / 1000;
-  const timeRemaining = GUESS_TIME - timeTaken;
-  console.log("Time taken:", timeTaken, "seconds");
+  //dont let pauses affect score
+  const timeRemaining = timeLeft;
+  const timeTaken = GUESS_TIME - timeRemaining;
+  console.log("Time taken:", timeTaken, "seconds (based on countdown)");
 
 
   const radiusBonus = distanceKm <= GAME_CONFIG.SCORING.DISTANCE_THRESHOLD ? 50 : 0;

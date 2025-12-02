@@ -2,6 +2,7 @@
 // Provides navigation menu with Back to Start and Mini Game options
 import { MatchingGame } from "./matching-game.js";
 import { TimelineGame } from "./timeline-game.js";
+import { stopTimer, resumeTimer } from "./game.js";
 
 let mg1: MatchingGame | null = null;
 let mg2: TimelineGame | null = null;
@@ -82,6 +83,25 @@ export function initializeMenu(): void {
     const isModalActive = (modal: HTMLDivElement | null): boolean =>
         !!modal && modal.classList.contains("active");
 
+    //this pauses the timer of the main game if we are in the minigame
+    const pauseMainGameForMinigame = (modal: HTMLDivElement | null): void => {
+        if (!modal) return;
+        //pause if the popup is open
+        if (!modal.classList.contains("active")) {
+            stopTimer();
+        }
+    };
+
+    
+    const resumeMainGameAfterMinigame = (modal: HTMLDivElement | null): void => {
+        if (!modal) return;
+        //only resume timer after user closes modal
+        if (modal.classList.contains("active")) {
+            //continue the timer from where it left off
+            resumeTimer();
+        }
+    };
+
     // ========== HAMBURGER MINI GAME BUTTONS ==========
     if (menuMinigame1) {
         menuMinigame1.addEventListener("click", (e: MouseEvent): void => {
@@ -90,6 +110,7 @@ export function initializeMenu(): void {
             console.log("Hamburger Mini game 1 clicked");
 
             if (!minigame1Modal) return;
+            pauseMainGameForMinigame(minigame1Modal);
             if (isModalActive(minigame1Modal)) {
                 console.log("Mini game 1 modal already active, ignoring extra click");
                 return;
@@ -115,6 +136,7 @@ export function initializeMenu(): void {
             console.log("Hamburger Mini game 2 clicked");
 
             if (!minigame2Modal) return;
+            pauseMainGameForMinigame(minigame2Modal);
             if (isModalActive(minigame2Modal)) {
                 console.log("Mini game 2 modal already active, ignoring extra click");
                 return;
@@ -141,6 +163,7 @@ export function initializeMenu(): void {
             console.log("Top Matching Game button clicked");
 
             if (!minigame1Modal) return;
+            pauseMainGameForMinigame(minigame1Modal);
             if (isModalActive(minigame1Modal)) {
                 console.log("Mini game 1 modal already active, ignoring extra click");
                 return;
@@ -163,6 +186,7 @@ export function initializeMenu(): void {
             console.log("Top Timeline Game button clicked");
 
             if (!minigame2Modal) return;
+            pauseMainGameForMinigame(minigame2Modal);
             if (isModalActive(minigame2Modal)) {
                 console.log("Mini game 2 modal already active, ignoring extra click");
                 return;
@@ -187,6 +211,7 @@ export function initializeMenu(): void {
             if (modalId) {
                 const modal = document.getElementById(modalId) as HTMLDivElement | null;
                 if (modal) {
+                    resumeMainGameAfterMinigame(modal);
                     modal.classList.remove("active");
                 }
             }
@@ -202,10 +227,12 @@ export function initializeMenu(): void {
     });
 
     // Click outside content closes modal
-    const modals: HTMLDivElement[] = [minigame1Modal, minigame2Modal];
-    modals.forEach((modal: HTMLDivElement): void => {
+    const modals: (HTMLDivElement | null)[] = [minigame1Modal, minigame2Modal];
+    modals.forEach((modal): void => {
+        if (!modal) return;
         modal.addEventListener("click", (event: MouseEvent): void => {
             if (event.target === modal) {
+                resumeMainGameAfterMinigame(modal);
                 modal.classList.remove("active");
             }
         });
@@ -214,8 +241,14 @@ export function initializeMenu(): void {
     // Escape closes modals
     document.addEventListener("keydown", (event: KeyboardEvent): void => {
         if (event.key === "Escape") {
-            minigame1Modal.classList.remove("active");
-            minigame2Modal.classList.remove("active");
+            if (minigame1Modal && minigame1Modal.classList.contains("active")) {
+                resumeMainGameAfterMinigame(minigame1Modal);
+                minigame1Modal.classList.remove("active");
+            }
+            if (minigame2Modal && minigame2Modal.classList.contains("active")) {
+                resumeMainGameAfterMinigame(minigame2Modal);
+                minigame2Modal.classList.remove("active");
+            }
         }
     });
 
