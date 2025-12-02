@@ -234,10 +234,10 @@ export function handleGuess(): void {
   const distanceKm = calculateDistance(guessLat, guessLon, correctLat, correctLon);
   console.log("Distance:", distanceKm, "km");
 
-  
-  const timeTaken = (Date.now() - gameStartTime) / 1000;
-  const timeRemaining = GUESS_TIME - timeTaken;
-  console.log("Time taken:", timeTaken, "seconds");
+  //dont let pauses affect score
+  const timeRemaining = timeLeft;
+  const timeTaken = GUESS_TIME - timeRemaining;
+  console.log("Time taken:", timeTaken, "seconds (based on countdown)");
 
 
   const radiusBonus = distanceKm <= GAME_CONFIG.SCORING.DISTANCE_THRESHOLD ? 50 : 0;
