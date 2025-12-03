@@ -5,6 +5,12 @@ export class MatchingGame {
   private selectedImage: HTMLElement | null = null;
   private selectedName: HTMLElement | null = null;
   private gameActive = true;
+  private eventListeners: Array<{
+        element: HTMLElement;
+        type: string;
+        handler: EventListener;
+  }> = [];
+
 
   constructor(eventsSourceUrl?: string) {
     this.events = [];
@@ -13,6 +19,7 @@ export class MatchingGame {
     this.selectedImage = null;
     this.selectedName = null;
     this.gameActive = true;
+    this.eventListeners = [];
 
     this.loadEvents(eventsSourceUrl)
       .then(() => {
@@ -31,31 +38,38 @@ export class MatchingGame {
     const names = document.querySelectorAll(".event-name");
 
     images.forEach(img => {
-      img.addEventListener("click", () => {
+      // make click handler for image
+      const clickHandler = (e: Event) => {
         if (!this.gameActive) return; // Prevent clicking after timer ends
         if (img.classList.contains("matched")) return;
         if (this.selectedImage) this.selectedImage.classList.remove("selected");
         this.selectedImage = img as HTMLElement;
         img.classList.add("selected");
         this.tryMatch();
-      });
-
+      };
+    img.addEventListener("click", clickHandler);
+    this.eventListeners.push({ element: img as HTMLElement, type: "click", handler: clickHandler as EventListener });
+            
       // Prevent users from right-clicking on images
-      img.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-        return false;
+      const contextHandler = (e: Event) => {
+                e.preventDefault();
+                return false;
+            };
+            img.addEventListener("contextmenu", contextHandler);
+            this.eventListeners.push({ element: img as HTMLElement, type: "contextmenu", handler: contextHandler as EventListener });
       });
-    });
 
     names.forEach(name => {
-      name.addEventListener("click", () => {
+      const clickHandler = (e: Event) => {
         if (!this.gameActive) return; // Prevent clicking after timer ends
         if (name.classList.contains("matched")) return;
         if (this.selectedName) this.selectedName.classList.remove("selected");
         this.selectedName = name as HTMLElement;
         name.classList.add("selected");
         this.tryMatch();
-      });
+      };
+      name.addEventListener("click", clickHandler);
+      this.eventListeners.push({ element: name as HTMLElement, type: "click", handler: clickHandler as EventListener});
     });
   }
 
@@ -146,12 +160,19 @@ export class MatchingGame {
   private initializePlayAgainButton() {
     const btn = document.getElementById("play-again");
     if (!btn) return;
-    btn.addEventListener("click", () => this.reset());
+
+    const handler = () => this.reset();
+    btn.addEventListener("click", handler);
+    this.eventListeners.push({ element: btn, type: "click", handler: handler as EventListener });
   }
 
+  // resets game; similar to constructor
   public reset() {
     this.stopTimer();
     this.gameActive = true; // Re-enable game on reset
+
+    // remove event listeners
+    this.removeEventListeners();
 
     // Clear all classes
     document.querySelectorAll(".event-image").forEach(img => {
@@ -163,10 +184,12 @@ export class MatchingGame {
 
     this.selectedImage = null;
     this.selectedName = null;
+
     this.loadRandomEvents();
     this.initializeSelection(); // re-bind events after reload
     this.updateScore();
     this.startTimer();
+    this.initializePlayAgainButton(); // re-bind play again button
   }
 
   // ---------------- Load Events ----------------
@@ -234,7 +257,30 @@ export class MatchingGame {
     return arr.sort(() => Math.random() - 0.5);
   }
 
+  private removeEventListeners() {
+        this.eventListeners.forEach(({ element, type, handler }) => {
+            element.removeEventListener(type, handler);
+        });
+        this.eventListeners = [];
+    }
+
   public destroy() {
     this.stopTimer();
+    this.removeEventListeners();
+
+    // Clear references
+    this.selectedImage = null;
+    this.selectedName = null;
+
+    // Reset state of game
+    this.gameActive = false;
+    this.events = [];
+  
+    // Clear Mini Game UI
+    const matchingArea = document.querySelector<HTMLElement>("#minigame1-modal .matching-area");
+        if (matchingArea) {
+            matchingArea.innerHTML = "";
+        }
+        console.log("Matching Game destroyed");
   }
 }
