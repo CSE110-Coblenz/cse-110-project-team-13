@@ -65,7 +65,7 @@ export function showResultScreen(
   if (distance < 50) feedback = "Amazing! You were very close!";
   else if (distance < 200) feedback = "Great accuracy!";
   else if (distance < 500) feedback = "Not bad — you're in the right region.";
-  else feedback = "Way off — try using landmarks!";
+  else feedback = "Way off — study your history!";
 
   feedbackEl.textContent = feedback;
 
