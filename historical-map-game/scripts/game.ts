@@ -31,6 +31,7 @@ let currentEvent: any = null;
 
 //reset game state
 export async function resetGame(): Promise<void> {
+  stopTimer();
   currentScore = 0;
   usedEventIndices = [];
   currentEvent = null;
@@ -257,7 +258,6 @@ export function handleGuess(): void {
     distanceKm,
     Math.round(totalScore)
   );
-  stopTimer();
 }
 
 //function to advance to next round (called from results screen)
