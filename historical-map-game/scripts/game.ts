@@ -257,6 +257,7 @@ export function handleGuess(): void {
     distanceKm,
     Math.round(totalScore)
   );
+  stopTimer();
 }
 
 //function to advance to next round (called from results screen)
